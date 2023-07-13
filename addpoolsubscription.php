@@ -116,8 +116,8 @@ if (!isset($_SESSION['hotelsys'])) {
                                              <div class="form-group">
                                                         <div class="form-check">
                                                             <input class="form-check-input" type="checkbox" value="linked" id="resident">
-                                                            <label class="form-check-label" for="defaultCheck1">
-                                                                Is old customer?
+                                                            <label class="form-check-label" for="resident">
+                                                                Is Resident ?
                                                             </label>
                                                         </div>
                                                     </div>

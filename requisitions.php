@@ -94,13 +94,13 @@ if (!isset($_SESSION['hotelsys'])) {
                                                 while ($row =  mysqli_fetch_array($list)) {
                                                     $requisition_id = $row['requisition_id'];
                                                     $status = $row['status'] == '1' ? 'Approved' : 'Pending';
-                                                    $timestamp = $row['timestamp'];
+                                                    $timestamp = $row['requisition_date'];
 
                                                 ?>
 
                                                     <tr class="gradeA">
                                                         <td><?php echo str_pad($requisition_id, 4, "0", STR_PAD_LEFT); ?></td>
-                                                        <td><?php echo date('d/m/Y', $timestamp); ?></td>
+                                                        <td><?php echo  $timestamp; ?></td>
                                                         <td> <?php echo $status; ?></td>
                                                         <td>
                                                             <a href="requisition?id=<?php echo $requisition_id; ?>" class="btn btn-primary btn-xs"><i class="fa fa-edit"></i>Details</a>
@@ -117,6 +117,11 @@ if (!isset($_SESSION['hotelsys'])) {
                                                 <?php } ?>
                                             </tbody>
                                         </table>
+                                    <?php } else{ ?>
+                                        <!-- show requisition not found issue  -->
+                                        <div class="alert alert-danger">
+                                            <h3>No Requisitions Found</h3>
+                                        </div>
                                     <?php } ?>
                                 </div>
                             </div>

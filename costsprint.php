@@ -38,7 +38,7 @@ if (!isset($_SESSION['hotelsys'])) {
         <div class="wrapper wrapper-content p-xl">
             <div class="ibox-content p-xl">
                 <div class="row">
-                    <div class="col-sm-2"><img src="assets/demo/pearllogo.png" class="img img-responsive"></div>
+                    <div class="col-sm-2"><img src="img/sitelogo.<?php echo $logo; ?>" class="img img-responsive"></div>
 
 
 
@@ -92,7 +92,7 @@ if (!isset($_SESSION['hotelsys'])) {
 
 
                 <div class="well m-t">
-                    <strong style="font-style: italic">@<?php echo date('Y', $timenow); ?> All Rights Reserved To Kings Conference</strong>
+                    <strong style="font-style: italic">@<?php echo date('Y', $timenow); ?> All Rights Reserved To Chato Beach Resort </strong>
                 </div>
             </div>
 

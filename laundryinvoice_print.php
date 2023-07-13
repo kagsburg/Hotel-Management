@@ -26,7 +26,7 @@ $id = $_GET['id'];
             <div class="col-sm-12" style="padding:0px;">
                 <div class="row" style="margin-left: 0;">
                     <?php
-                        $vat = 10;
+                        $vat = 18;
                         $check=  mysqli_query ($con,"SELECT * FROM laundry WHERE laundry_id='$id'") ;
         
         $laundry = mysqli_query($con, "SELECT * FROM laundry WHERE status='1' AND laundry_id='$id'");
@@ -98,9 +98,9 @@ $id = $_GET['id'];
         $laundrypackage = $row3['laundrypackage'];
         // $totalcharge += $clothes * $charge;        
         
-        $totalvat = (($totalcharge * $vat) / 110);
-        $htva = $totalcharge - $totalvat;
-        $net = $htva + $totalvat;
+        $totalvat = (($totalcharge * $vat) / 100);
+        // $htva = $totalcharge - $totalvat;
+        $net = $totalcharge + $totalvat;
         ?>
                     <div class="col-sm-12" style="font-size:10px;font-family: times new roman">
                         <img src="img/sitelogo.<?php echo $logo; ?>" class="img img-responsive" width="60">
@@ -193,10 +193,10 @@ $id = $_GET['id'];
                             <td><strong>TOTAL :</strong></td>
                             <td><strong><?php echo number_format($totalcharge); ?></strong></td>
                         </tr> -->
-                        <tr>
+                        <!-- <tr>
                             <td>HTVA :</td>
                             <td style="text-align: right;"><?php echo number_format($htva); ?></td>
-                        </tr>
+                        </tr> -->
                         <tr>
                             <td>VAT :</td>
                             <td style="text-align: right;"><?php echo number_format($totalvat); ?></td>
@@ -228,8 +228,8 @@ $id = $_GET['id'];
             </div>
             <div class="big-footer">
                 <div class="footer-text__block text-center">
-                    <span>Av, du large, Ndamukiza-kinindo• BP: 5970 kinindo• Bujumbura-Burundi• Tel (257) 22 27 36 36 /22274114/61155555</span> <br>
-                    <span>Email: info@kccburundi.org• Website: www.kccburundi.org• Compte Bancaire : 00301-0036242-01-01B­ANCOBU</span>
+                <span>Chato, Geita Tanzania• Tel (255) 0758301785 • VAT NO: 400297540</span> <br>
+                    <span>Email: info@chatobeachresort.com• Website: www.chatobeachresort.com</span>
                 </div>
             </div>
         </div>

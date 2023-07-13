@@ -1,7 +1,8 @@
 <?php
 include 'includes/conn.php';
-if (($_SESSION['hotelsyslevel'] != 1) && ($_SESSION['sysrole'] != 'Restaurant Attendant')) {
+if (($_SESSION['hotelsyslevel'] != 1) && ($_SESSION['sysrole'] != 'Restaurant Attendant' && $_SESSION['sysrole'] != 'Marketing and Events')) {
     header('Location:login.php');
+    exit();
 }
 $st = strtotime($_GET['st'].' '.$_GET['stt']);
 $en = strtotime($_GET['en'].' '.$_GET['ent']);

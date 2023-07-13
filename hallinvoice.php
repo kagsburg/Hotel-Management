@@ -129,7 +129,7 @@ if (mysqli_num_rows($delivery) === 0) {
         $rowc = mysqli_fetch_array($purposes);
         $room = $rowc['room'];
         $price = $days * $charge;
-        $vatamount = (($price * 10) / 100);
+        $vatamount = (($price * 18) / 100);
         // $charge = $price;
         // $totalvat += $vatamount;
         ?>
@@ -137,7 +137,7 @@ if (mysqli_num_rows($delivery) === 0) {
                                         <img src="img/sitelogo.<?php echo $logo; ?>" class="img img-responsive" width="100">
                                     </div>
                                     <div class="col-sm-9 pull-right">
-                                        <h2 class="text-center mb-4"><strong>Raison Social: KING’S CONFERENCE CENTRE</strong></h2>
+                                        <h2 class="text-center mb-4"><strong> </strong></h2>
                                         <div class="d-flex" style="justify-content: space-between;">
                                             <span>NIF: 4000058109</span>
                                             <span>Centre fiscal: DGC</span>

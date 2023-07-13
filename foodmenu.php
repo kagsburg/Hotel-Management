@@ -134,13 +134,12 @@ if (!isset($_SESSION['hotelsys'])) {
                                                                 } ?></td>
                                                         <td class="center">
                                                             <button data-toggle="modal" data-target="#products<?php echo $menuitem_id; ?>" class="btn btn-xs btn-success">Products</button>
-
+                                                                
+                                                                    
                                                             <a href="editmenuitem?id=<?php echo $menuitem_id; ?>" class="btn btn-xs btn-info"><i class="fa fa-edit"></i> Edit</a>
-                                                            <?php
-                                                            if (($creator == $_SESSION['hotelsys']) || ($_SESSION['hotelsyslevel'] == 1)) {
-
-
-                                                            ?>
+                                                                    <?php
+                                                                    if (($creator == $_SESSION['hotelsys']) || ($_SESSION['hotelsyslevel'] == 1)) {
+                                                                        ?>
                                                                 <a href="hideitem.php?id=<?php echo $menuitem_id . '&&status=' . $status; ?>" class="btn btn-danger  btn-xs" onclick="return confirm_delete<?php echo $menuitem_id; ?>()">Remove <i class="fa fa-arrow-up"></i></a>
 
 

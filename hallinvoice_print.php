@@ -372,8 +372,8 @@ if (mysqli_num_rows($delivery) === 0) {
             </div>
             <div class="big-footer">
                 <div class="footer-text__block text-center">
-                    <span>Av, du large, Ndamukiza-kinindo• BP: 5970 kinindo• Bujumbura-Burundi• Tel (257) 22 27 36 36 /22274114/61155555</span> <br>
-                    <span>Email: info@kccburundi.org• Website: www.kccburundi.org• Compte Bancaire : 00301-0036242-01-01B­ANCOBU</span>
+                <span>Chato, Geita Tanzania• Tel (255) 0758301785 • VAT NO: 400297540</span> <br>
+                    <span>Email: info@chatobeachresort.com• Website: www.chatobeachresort.com</span>
                 </div>
             </div>
 

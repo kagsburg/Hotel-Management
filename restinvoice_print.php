@@ -1,6 +1,6 @@
 <?php
 include 'includes/conn.php';
-if (($_SESSION['hotelsyslevel'] != 1) && ($_SESSION['sysrole'] != 'Restaurant Attendant') && ($_SESSION['sysrole'] != 'Accountant')) {
+if (($_SESSION['hotelsyslevel'] != 1) && ($_SESSION['sysrole'] != 'Restaurant Attendant') && ($_SESSION['sysrole'] != 'Accountant'&& $_SESSION['sysrole'] != 'Marketing and Events')) {
   header('Location:login.php');
 }
 $order_id = $_GET['id'];

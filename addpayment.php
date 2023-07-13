@@ -105,7 +105,7 @@ $id = $_GET['id'];
            $nights =  round(($checkout - $checkin) / (3600 * 24));
        }
 
-       $totalreduction = $reduction * $nights;
+       $totalreduction = intval($reduction) * $nights;
 
        $getnumber = mysqli_query($con, "SELECT * FROM rooms  WHERE room_id='$room_id'");
        $row1 =  mysqli_fetch_array($getnumber);
@@ -118,11 +118,11 @@ $id = $_GET['id'];
        $dollarCharge =  $row1['charge'];
        $sharecharge = $row1["sharecharge"];
        $dollarCharge = ($adults > 1 && isset($sharecharge)) ? $sharecharge : $dollarCharge;
-       $charge = getForexConvertedAmount($currencyrate, $dollarCharge);
+      //  $charge = getForexConvertedAmount($currencyrate, $dollarCharge);
 
        $totalcharge = $dollarCharge * $nights;
        $totalcharge -= $totalreduction;
-       $totalcharge = getForexConvertedAmount($currencyrate, $totalcharge);
+      //  $totalcharge = getForexConvertedAmount($currencyrate, $totalcharge);
 
 
        $totalotherservices = 0;
@@ -154,8 +154,8 @@ $id = $_GET['id'];
                $timestamp = $row['timestamp'];
                $totalcharges = mysqli_query($con, "SELECT COALESCE(SUM(foodprice*quantity), 0) AS totalcosts FROM restaurantorders WHERE order_id='$order_id'");
                $row =  mysqli_fetch_array($totalcharges);
-               $totalrestcosts = getForexConvertedAmount($currencyrate, $row['totalcosts']);
-               $restbill = $totalrestcosts + $restbill;
+               // $totalrestcosts = getForexConvertedAmount($currencyrate, $row['totalcosts']);
+               $restbill += $row['totalcosts'] ;
            }
        }
 
@@ -171,7 +171,7 @@ $id = $_GET['id'];
                $status = $row['status'];
                $creator = $row['creator'];
                $invoice_no = 23 * $id;
-               $charge = getForexConvertedAmount($currencyrate, $row['charge']);
+               // $charge = getForexConvertedAmount($currencyrate, $row['charge']);
                $reservation = mysqli_query($con, "SELECT * FROM reservations WHERE reservation_id='$reserve_id'");
                $row2 =  mysqli_fetch_array($reservation);
                $firstname = $row2['firstname'];
@@ -182,7 +182,7 @@ $id = $_GET['id'];
                $getpackage = mysqli_query($con, "SELECT * FROM laundrypackages WHERE status='1' AND laundrypackage_id='$package_id'");
                $row3 = mysqli_fetch_array($getpackage);
                $laundrypackage = $row3['laundrypackage'];
-               $totallaundry = $totallaundry + $charge;
+               $totallaundry = $totallaundry + $row['charge'];
            }
        }
 
@@ -204,7 +204,7 @@ $id = $_GET['id'];
                 VALUES('$id','$bill','$mode' ,'$paymentdate','1')") or die(mysqli_error($con));
            }
        }
-       $getpayments = mysqli_query($con, "SELECT SUM(amount) AS totalpaid FROM payments WHERE reservation_id='$id'");
+       $getpayments = mysqli_query($con, "SELECT SUM(amount) AS totalpaid FROM payments WHERE reservation_id='$id' and status='1'");
        $payrow = mysqli_fetch_array($getpayments);
        $paidamount = $payrow['totalpaid'];
        ?>
@@ -242,12 +242,12 @@ $id = $_GET['id'];
                                  </div>
                                  <div class="feed-element">
                                     <div class="media-body ">
-                                       <strong>Total Bill</strong> : $ <?php echo number_format($totalbill); ?> <br>
+                                       <strong>Total Bill</strong> : TSHS <?php echo number_format($totalbill); ?> <br>
                                     </div>
                                  </div>
                                  <div class="feed-element">
                                     <div class="media-body ">
-                                       <strong>Paid Amount</strong> : $ <?php echo number_format($paidamount); ?> <br>
+                                       <strong>Paid Amount</strong> : TSHS <?php echo number_format($paidamount); ?> <br>
                                     </div>
                                  </div>
 
@@ -260,7 +260,7 @@ $id = $_GET['id'];
                      <div class="ibox float-e-margins">
                         <div class="ibox-title">
                            <h5>Add Details</h5>
-                           <label class="label label-danger pull-right" style="font-size: 14px">Balance :  USD<?php echo number_format($totalbill - $paidamount); ?></label>
+                           <label class="label label-danger pull-right" style="font-size: 14px">Balance :  TSHS <?php echo number_format($totalbill - $paidamount); ?></label>
                         </div>
                         <div class="ibox-content">
                            <?php

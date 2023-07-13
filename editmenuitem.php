@@ -1,6 +1,6 @@
 <?php
 include 'includes/conn.php';
-if ((!isset($_SESSION['hotelsys'])) || ($_SESSION['hotelsyslevel'] != 1)) {
+if ((!isset($_SESSION['hotelsys'])) ) {
   header('Location:login.php');
 }
 $id = $_GET['id'];
