@@ -1,0 +1,189 @@
+<?php
+include 'includes/conn.php';
+if (!isset($_SESSION['hotelsys'])) {
+    header('Location:login.php');
+}
+
+?>
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Requisition Details- Hotel Manager</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="font-awesome/css/font-awesome.css" rel="stylesheet">
+    <!--<link href="css/plugins/iCheck/custom.css" rel="stylesheet">-->
+    <link href="css/animate.css" rel="stylesheet">
+    <link href="css/plugins/chosen/chosen.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+    <script type="text/javascript" src="js/jquery-1.11.2.min.js"></script>
+
+</head>
+
+<body>
+    <?php
+    if ((isset($_SESSION['lan'])) && ($_SESSION['lan'] == 'fr')) {
+        include 'fr/requisitiondetails.php';
+    } else {
+    ?>
+        <div id="wrapper">
+
+            <?php include 'nav.php'; ?>
+
+            <div id="page-wrapper" class="gray-bg">
+                <div class="row border-bottom">
+                    <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
+                        <div class="navbar-header">
+                            <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>
+
+                        </div>
+                        <ul class="nav navbar-top-links navbar-right">
+
+                            <li>
+                                <a href="logout">
+                                    <i class="fa fa-sign-out"></i> Log out
+                                </a>
+                            </li>
+                        </ul>
+
+                    </nav>
+                </div>
+                <div class="row wrapper border-bottom white-bg page-heading">
+                    <div class="col-lg-10">
+                        <h2>Selected Items List</h2>
+                        <ol class="breadcrumb">
+                            <li> <a href=""><i class="fa fa-home"></i> Home</a> </li>
+                            <li> <a href="addrequisition">Add Requisition</a> </li>
+                            <li class="active">
+                                <strong>Selected Items</strong>
+                            </li>
+                        </ol>
+                    </div>
+                    <div class="col-lg-2">
+
+                    </div>
+                </div>
+                <div class="wrapper wrapper-content">
+                    <div class="row">
+
+                        <div class="col-lg-7">
+                            <div class="ibox float-e-margins">
+                                <div class="ibox-title">
+                                    <h5>Items Selected for Purchase</h5>
+                                    <label class="label label-info pull-right" id="label-info">
+                                        <?php
+                                        if (isset($_SESSION["reqproducts"])) {
+                                            echo count($_SESSION["reqproducts"]);
+                                        } else {
+                                            echo 0;
+                                        }
+                                        ?>
+                                    </label>
+                                </div>
+                                <div class="ibox-content ">
+                                    <?php
+
+                                    if (isset($_SESSION["reqproducts"]) && count($_SESSION["reqproducts"]) > 0) { //if we have session variable
+                                        //		$cart_box = '<ul class="cart-products-loaded">';
+                                        $total = 0;
+
+
+                                    ?>
+
+                                        <div class="table-responsive m-t">
+
+                                            <table class="table invoice-table">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Item</th>
+                                                        <th>Quantity</th>
+                                                        <th>Unit Price</th>
+                                                        <th>Subtotal</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <?php
+                                                    foreach ($_SESSION["reqproducts"] as $product) { //loop though items and prepare html content
+
+                                                        //set variables to use them in HTML content below
+                                                        $menuitem = $product["menuitem"];
+                                                        $price = $product["price"];
+                                                        $item_id = $product["item_id"];
+                                                        $product_qty = $product["product_qty"];
+
+                                                        $subtotal = ($price * $product_qty);
+                                                        $total = ($total + $subtotal);
+                                                    ?>
+                                                        <tr>
+                                                            <td>
+                                                                <div>
+                                                                    <strong>
+                                                                        <?php echo $menuitem; ?>
+                                                                    </strong>
+                                                                </div>
+                                                            </td>
+                                                            <td> <?php echo $product_qty; ?></td>
+                                                            <td> <?php echo number_format($price); ?></td>
+                                                            <td><?php echo number_format($subtotal); ?></td>
+                                                        </tr>
+                                                    <?php } ?>
+
+                                                </tbody>
+                                            </table>
+                                        </div><!-- /table-responsive -->
+
+                                        <table class="table invoice-total">
+                                            <tbody>
+                                                <tr>
+
+                                                    <td><strong>TOTAL :</strong></td>
+                                                    <td><strong><?php echo number_format($total); ?></strong></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    <?php
+
+                                    } else {
+                                        echo "<div class='alert alert-danger'>No  items added yet</div>"; //we have empty cart
+                                    }
+                                    ?>
+                                </div>
+
+                            </div>
+                            <a href="addrequisition" class="btn btn-warning"><i class="fa fa-reply"></i> Back</a>
+                            <a href="cancelrequisition" class="btn btn-danger" onclick="return confirm_cancel()"><i class="fa fa-trash"></i> Cancel</a>
+                            <a href="saverequisition" class="btn btn-success" onclick="return confirm_save()"><i class="fa fa-save"></i> Submit</a>
+                            <script type="text/javascript">
+                                function confirm_save() {
+                                    return confirm('You are about To Submit this list. Are you sure you want to proceed?');
+                                }
+
+                                function confirm_cancel() {
+                                    return confirm('You are about To Cancel this list. Are you sure you want to proceed?');
+                                }
+                            </script>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    <?php } ?>
+    <!-- Mainly scripts -->
+
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/plugins/metisMenu/jquery.metisMenu.js"></script>
+
+    <!-- Custom and plugin javascript -->
+    <script src="js/inspinia.js"></script>
+    <script src="js/plugins/pace/pace.min.js"></script>
+    <script src="js/plugins/chosen/chosen.jquery.js"></script>
+    <!-- iCheck -->
+    <script language="JavaScript" src="js/gen_validatorv4.js" type="text/javascript"></script>
+</body>
+
+</html>
