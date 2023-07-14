@@ -224,32 +224,32 @@ $empid = $_SESSION['emp_id'];
                 </div>
             </div>
             <?php
-            // $getitems =  mysqli_query($con, "SELECT * FROM purchaseditems WHERE requisition_id='$id'");
-            // while ($product = mysqli_fetch_array($getitems)) {
-            //     //set variables to use them in HTML content below
-            //     $purchaseitem_id = $product["purchaseditem_id"];
-            //     $item_id = $product["item_id"];
-            //     $stock = mysqli_query($con, "SELECT * FROM stock_items WHERE stockitem_id='$item_id'");
-            //     $row3 =  mysqli_fetch_array($stock);
-            //     $stockitem2 = $row3['stock_item'];
-            //     $quantity = $product["quantity"];
-            //     $price = $product["price"];
+            $getitems =  mysqli_query($con, "SELECT * FROM purchaseditems WHERE requisition_id='$id'");
+            while ($product = mysqli_fetch_array($getitems)) {
+                //set variables to use them in HTML content below
+                $purchaseitem_id = $product["purchaseditem_id"];
+                $item_id = $product["item_id"];
+                $stock = mysqli_query($con, "SELECT * FROM stock_items WHERE stockitem_id='$item_id'");
+                $row3 =  mysqli_fetch_array($stock);
+                $stockitem2 = $row3['stock_item'];
+                $quantity = $product["quantity"];
+                $price = $product["price"];
             ?>
-                <!-- <div id="modal-form<?php //echo $purchaseitem_id ?>" class="modal fade" aria-hidden="true">
+                <div id="modal-form<?php echo $purchaseitem_id ?>" class="modal fade" aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-body">
                                 <div class="row">
                                     <div class="col-sm-12">
-                                        <h3 class="m-t-none m-b">Edit <?php //echo $stockitem2; ?></h3>
-                                        <form role="form" action="edititemprice.php?id=<?php //echo $purchaseitem_id; ?>" method="POST">
+                                        <h3 class="m-t-none m-b">Edit <?php echo $stockitem2; ?></h3>
+                                        <form role="form" action="edititemprice.php?id=<?php echo $purchaseitem_id; ?>" method="POST">
                                             <div class="form-group">
-                                                <label for="qty<?php //echo $purchaseitem_id ?>">Quantity</label>
-                                                <input type="number" id="qty<?php //echo $purchaseitem_id ?>" name="quantity" class="form-control" required="required" value="<?php //echo $quantity; ?>">
+                                                <label for="qty<?php echo $purchaseitem_id ?>">Quantity</label>
+                                                <input type="number" id="qty<?php echo $purchaseitem_id ?>" name="quantity" class="form-control" required="required" value="<?php echo $quantity; ?>">
                                             </div>
                                             <div class="form-group">
-                                                <label for="prc<?php //echo $purchaseitem_id ?>">Unit Price</label>
-                                                <input type="number" step="0.01" name="unitprice" id="prc<?php //echo $purchaseitem_id ?>" class="form-control" required="required" value="<?php //echo $price; ?>">
+                                                <label for="prc<?php echo $purchaseitem_id ?>">Unit Price</label>
+                                                <input type="number" step="0.01" name="unitprice" id="prc<?php echo $purchaseitem_id ?>" class="form-control" required="required" value="<?php echo $price; ?>">
                                             </div>
                                             <div>
                                                 <button class="btn btn-sm btn-primary pull-right m-t-n-xs" type="submit"><strong>Edit</strong></button>
@@ -261,8 +261,8 @@ $empid = $_SESSION['emp_id'];
                             </div>
                         </div>
                     </div>
-                </div> -->
-            <?php //} ?>
+                </div>
+            <?php } ?>
         </div>
     <?php } ?>
     <!-- Mainly scripts -->

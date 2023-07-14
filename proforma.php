@@ -212,7 +212,7 @@ function getForexConvertedAmount($currencyrate, $amount)
         $dollarCharge =  $row1['charge'];
         $sharecharge = $row1["sharecharge"];
         $dollarCharge = ($adults > 1 && isset($sharecharge)) ? $sharecharge : $dollarCharge;
-        $charge = getForexConvertedAmount($currencyrate, $dollarCharge);
+        $charge = $dollarCharge;
         //tax issues
 
         // $reduction = empty($reduction) ? 0: $reduction;
@@ -277,7 +277,7 @@ function getForexConvertedAmount($currencyrate, $amount)
                                         <?php
                                             $totalcharge = $dollarCharge * $nights;
                                             $totalcharge -= $totalreduction;
-                                            $totalcharge = getForexConvertedAmount($currencyrate, $totalcharge);
+                                            // $totalcharge = getForexConvertedAmount($currencyrate, $totalcharge);
                                             ?>  
                                         <tr>
                                             <td><strong>NET TOTAL :</strong></td>
@@ -464,7 +464,8 @@ function getForexConvertedAmount($currencyrate, $amount)
                 $status = $row['status'];
                 $creator = $row['creator'];
                 $invoice_no = 23 * $id;
-                $charge = getForexConvertedAmount(1, $row['charge']);
+                $charge = $row['charge'];
+                // $charge = getForexConvertedAmount(1, $row['charge']);
                 $reservation = mysqli_query($con, "SELECT * FROM reservations WHERE reservation_id='$reserve_id'");
                 $row2 =  mysqli_fetch_array($reservation);
                 $firstname = $row2['firstname'];
@@ -475,7 +476,14 @@ function getForexConvertedAmount($currencyrate, $amount)
                 $getpackage = mysqli_query($con, "SELECT * FROM laundrypackages WHERE status='1' AND laundrypackage_id='$package_id'");
                 $row3 = mysqli_fetch_array($getpackage);
                 $laundrypackage = $row3['laundrypackage'];
-                $totallaundry = $totallaundry + $charge;
+                $totallaundry = 0;
+                $getlaundry2 = mysqli_query($con, "SELECT * FROM laundry WHERE reserve_id='$reserve_id' AND timestamp='$timestamp' AND status='1'");
+                
+                while ($row4 = mysqli_fetch_array($getlaundry2)) {
+                    $totallaundry += $row4['clothes'] * $row4['charge'];
+                }
+                $totalvat = ((($totallaundry ) * $vat));
+                $net = $totalvat + $totallaundry;
                 ?>
                                         <div class="table-responsive m-t">
                                             <h3><i>Laundry Work on <?php echo date('d/m/Y', $timestamp); ?></i></h3>
@@ -509,7 +517,7 @@ function getForexConvertedAmount($currencyrate, $amount)
                                         <tbody>
                                             <tr>
                                                 <td><strong>TOTAL LAUNDRY:</strong></td>
-                                                <td><strong><?php echo number_format($totallaundry); ?> TSHS</strong></td>
+                                                <td><strong><?php echo number_format($net); ?> TSHS</strong></td>
                                             </tr>
                                         </tbody>
                                     </table>

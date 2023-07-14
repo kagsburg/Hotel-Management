@@ -38,6 +38,7 @@ $id = $_GET['id'];
         $package_id = $row['package_id'];
         $timestamp = $row['timestamp'];
         $customername = $row['customername'];
+        // print ($customername);
         $phone = $row['phone'];
         $status = $row['status'];
         $charge = $row['charge'];
@@ -100,46 +101,45 @@ $id = $_GET['id'];
         
         $totalvat = (($totalcharge * $vat) / 100);
         // $htva = $totalcharge - $totalvat;
-        $net = $totalcharge + $totalvat;
+        // $net = $totalcharge + $totalvat;
+        $net = $totalcharge
         ?>
                     <div class="col-sm-12" style="font-size:10px;font-family: times new roman">
                         <img src="img/sitelogo.<?php echo $logo; ?>" class="img img-responsive" width="60">
                         <div class="w-100" style="margin-top: 6px;">
                             <div class="d-flex" style="justify-content: space-between;">
-                                <span>NIF: 4000058109</span>
-                                <span>Centre fiscal: DGC</span>
+                            <span></span>
+                                <span>Chato Beach Resort Company Limited</span>
                             </div>
                             <div class="d-flex" style="justify-content: space-between;">
-                                <span>R.C:82336</span>
-                                <span>Secteur d’activités: Hôtellerie</span>
+                                <span></span>
+                                <span>TIN: 136073761</span>
                             </div>
                             <div class="d-flex" style="justify-content: space-between;">
-                                <span>BP: 5970 kinindo</span>
-                                <span>Forme juridique: SURL</span>
+                                <span></span>
+                                <span>P.O Box 54 Chato, Geita</span>
                             </div>
                             <div class="d-flex" style="justify-content: space-between;">
-                                <span>Tel: +257 61 15 55 55</span>
-                                <span>Assujetti à la TVA: Oui</span>
+                                <span></span>
+                                <span>Tel: +255758301785</span>
                             </div>
                             <div class="d-flex" style="justify-content: space-between;">
-                                <span>Commune Muha, Zone Kinindo</span>
+                                <span></span>
                             </div>
                             <div class="d-flex" style="justify-content: space-between;">
-                                <span>Av: Av, du large, Ndamukiza-kinindo</span>
+                                <span></span>
                             </div>
                         </div>
                         <h4 class="text-navy">Invoice # <?php echo $invoice_no; ?></h4>
                         <address>
                             <strong>
-                                Le client <br>
-                                <!-- Nom et prénom ou Raison Social:
-                                <?php echo $customername; ?><br> -->
+                                Guest Name : <?php echo $customername; ?> <br/>
                             </strong>
-                            <strong>P:</strong> <?php echo $phone; ?><br />
-                            <span><strong>NIF:</strong></span><br>
-                            <span><strong>Salle:</strong> <?php echo $roomnumber ?? ""; ?></span><br>
-                            <span><strong>Assujetti à la TVA:</strong> Oui Non</span><br>
-                            <span><strong>Doit pour ce qui suit:</strong></span><br>
+                            <strong>Tel :</strong> <?php echo $phone; ?><br />
+                            <!-- <span><strong>NIF:</strong></span><br> -->
+                            <span><strong>Room No:</strong> <?php echo $roomnumber ?? ""; ?></span><br>
+                            <!-- <span><strong>Assujetti à la TVA:</strong> Oui Non</span><br>
+                            <span><strong>Doit pour ce qui suit:</strong></span><br> -->
                             <span><strong>Invoice Date:</strong> <?php echo date('d/m/Y', $timenow); ?></span><br />
                         </address>
                     </div>

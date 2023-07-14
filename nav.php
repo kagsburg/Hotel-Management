@@ -861,7 +861,7 @@ if ((isset($_SESSION['lan'])) && ($_SESSION['lan'] == 'fr')) {
 
                            </ul>
                         </li>
-                        <li>
+                        <!-- <li>
                            <a href="#">Hall Buffets<span class="fa arrow"></span></a>
                            <ul class="nav nav-third-level">
                               <li>
@@ -871,7 +871,7 @@ if ((isset($_SESSION['lan'])) && ($_SESSION['lan'] == 'fr')) {
                                  <a href="hallbuffets">View Buffets</a>
                               </li>
                            </ul>
-                        </li>
+                        </li> -->
                         <li><a href="addrestaurantorder">Add Order</a></li>
                         <li><a href="getrestinvoicesreport">Invoices Report</a></li>
                      </ul>

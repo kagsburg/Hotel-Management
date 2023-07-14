@@ -124,7 +124,7 @@ $table = $_GET['table'];
                                                     $quantity = $row['quantity'];
                                                     $stockitem = mysqli_query($con, "SELECT * FROM stock_items WHERE stockitem_id='$stockitem_id'");
                                                     $row1 =  mysqli_fetch_array($stockitem);
-                                                    $stockitem = $row1['stock_item'];
+                                                    // $stockitem_name = $row1['stock_item'];
                                                     mysqli_query($con, "INSERT INTO consumeditems(stockitem_id,menuitem_id,order_id,items,quantity,status) VALUES('$stockitem_id','$item_id','$order_id','$product_qty','$quantity',1)");
                                                 }
                                                 unset($_SESSION["rproducts"]);

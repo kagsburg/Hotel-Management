@@ -236,8 +236,9 @@ if (!isset($_SESSION['hotelsys'])) {
                                                                 <!--<a href="restorderpayment?id=<?php echo $order_id; ?>" class="btn btn-xs btn-info" onclick="return confirm_payment<?php echo $order_id; ?>()">Approve Payment</a><br>-->
                                                             <?php } ?>
                                                             <?php if ($status != 1) { ?>
-                                                                <a href="hiderestorder?id=<?php echo $order_id; ?>" class="btn btn-xs btn-danger" onclick="return confirm_delete<?php echo $order_id; ?>()">Cancel</a>
+                                                                <!-- <a href="hiderestorder?id=<?php echo $order_id; ?>" class="btn btn-xs btn-danger" onclick="return confirm_delete<?php echo $order_id; ?>()">Cancel</a> -->
                                                             <?php } ?>
+                                                            <a href="hiderestorder?id=<?php echo $order_id; ?>" class="btn btn-xs btn-danger" onclick="return confirm_delete<?php echo $order_id; ?>()">Cancel</a>
                                                             <a href="loserestorder?id=<?php echo $order_id; ?>" class="btn btn-xs btn-danger" onclick="return confirm_loss<?php echo $order_id; ?>()">Loss</a>
                                                             <script type="text/javascript">
                                                                 function confirm_payment<?php echo $order_id; ?>() {

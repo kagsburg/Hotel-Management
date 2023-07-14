@@ -228,7 +228,7 @@ if (isset($_POST['bill'])) {
                                                 $roomtype = $row1['roomtype'];
                                                 $sharecharge = $row1["sharecharge"];
                                                 $charge = ($adults > 1 && isset($sharecharge)) ? $sharecharge : $row1['charge'];
-                                                $charge = getForexConvertedAmount($currencyrate, $charge);
+                                                $charge =  $charge;
                                                 $totalcharge = $charge * $nights;
                                                 $totalcharge -= $totalreduction;
                                                 $vat = 10;
@@ -312,8 +312,8 @@ if (isset($_POST['bill'])) {
                                                 } else {
                                                    $rate = 1;
                                                 }
-                                                $reduction = $row3['reduction'] * $rate;
-                                                $price = $row3['price'] * $rate;
+                                                $reduction = intval($row3['reduction']) * $rate;
+                                                $price = intval($row3['price']) * $rate;
                                                 $timestamp = $row3['timestamp'];
                                                 $subtotal = $price - $reduction;
                                                 $totalotherservices = $totalotherservices + $subtotal;

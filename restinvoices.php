@@ -1,6 +1,6 @@
 <?php
 include 'includes/conn.php';
-if (($_SESSION['hotelsyslevel'] != 1) && ($_SESSION['sysrole'] != 'Restaurant Attendant' && $_SESSION['sysrole'] != 'Marketing and Events')) {
+if (($_SESSION['hotelsyslevel'] != 1) && ($_SESSION['sysrole'] != 'Restaurant Attendant' && $_SESSION['sysrole'] != 'Marketing and Events' && $_SESSION['sysrole'] != 'Kitchen Exploitation Officer')) {
     header('Location:login.php');
 }
 ?>
@@ -82,7 +82,7 @@ if (($_SESSION['hotelsyslevel'] != 1) && ($_SESSION['sysrole'] != 'Restaurant At
                                 </div>
                                 <div class="ibox-content">
                                     <?php
-                                    $restorders = mysqli_query($con, "SELECT * FROM orders WHERE status=1 ORDER BY order_id DESC");
+                                    $restorders = mysqli_query($con, "SELECT * FROM orders WHERE status IN (1,2) ORDER BY order_id DESC");
                                     if (mysqli_num_rows($restorders) > 0) {
                                     ?>
                                         <table class="table table-striped table-bordered table-hover dataTables-example" id="datatable">

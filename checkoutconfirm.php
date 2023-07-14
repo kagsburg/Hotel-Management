@@ -49,12 +49,12 @@ $roomtypes = mysqli_query($con, "SELECT * FROM roomtypes WHERE roomtype_id='$typ
 $row1 =  mysqli_fetch_array($roomtypes);
 $roomtype = $row1['roomtype'];
 $dollarCharge =  $row1['charge'];
-$charge = getForexConvertedAmount($currencyrate, $dollarCharge);
+$charge =  $dollarCharge;
 
 $totalcharge = $dollarCharge * $nights;
 if (!empty($reduction))
     $totalcharge -= $reduction;
-$totalcharge = getForexConvertedAmount($currencyrate, $totalcharge);
+// $totalcharge = getForexConvertedAmount($currencyrate, $totalcharge);
 $totalotherservices = 0;
 $getotherservices = mysqli_query($con, "SELECT * FROM otherservices WHERE reservation_id='$id' AND status=1") or die(mysqli_error($con));
 if (mysqli_num_rows($getotherservices) > 0) {
@@ -67,8 +67,8 @@ if (mysqli_num_rows($getotherservices) > 0) {
         } else {
             $rate = 1;
         }
-        $reduction = $row3['reduction'] * $rate;
-        $price = $row3['price'] * $rate;
+        $reduction = intval($row3['reduction']) * $rate;
+        $price = intval($row3['price']) * $rate;
         $timestamp = $row3['timestamp'];
         $subtotal = $price - $reduction;
         $totalotherservices = $totalotherservices + $subtotal;
@@ -84,7 +84,7 @@ if (mysqli_num_rows($restorder) > 0) {
         $timestamp = $row['timestamp'];
         $totalcharges = mysqli_query($con, "SELECT COALESCE(SUM(foodprice*quantity), 0) AS totalcosts FROM restaurantorders WHERE order_id='$order_id'");
         $row =  mysqli_fetch_array($totalcharges);
-        $totalrestcosts = getForexConvertedAmount($currencyrate, $row['totalcosts']);
+        $totalrestcosts =  $row['totalcosts'];
         $restbill = $totalrestcosts + $restbill;
     }
 }
@@ -101,7 +101,7 @@ if (mysqli_num_rows($laundry)) {
         $status = $row['status'];
         $creator = $row['creator'];
         $invoice_no = 23 * $id;
-        $charge = getForexConvertedAmount($currencyrate, $row['charge']);
+        $charge = $row['charge'];
         $reservation = mysqli_query($con, "SELECT * FROM reservations WHERE reservation_id='$reserve_id'");
         $row2 =  mysqli_fetch_array($reservation);
         $firstname = $row2['firstname'];
@@ -112,7 +112,12 @@ if (mysqli_num_rows($laundry)) {
         $getpackage = mysqli_query($con, "SELECT * FROM laundrypackages WHERE status='1' AND laundrypackage_id='$package_id'");
         $row3 = mysqli_fetch_array($getpackage);
         $laundrypackage = $row3['laundrypackage'];
-        $totallaundry = $totallaundry + $charge;
+        // $totallaundry = $totallaundry + $charge;
+        $getlaundry2 = mysqli_query($con, "SELECT * FROM laundry WHERE reserve_id='$reserve_id' AND timestamp='$timestamp' AND status='1'");
+        $totallaundry = 0;
+        while ($row4 = mysqli_fetch_array($getlaundry2)) {
+            $totallaundry += $row4['clothes'] * $row4['charge'];
+        }
     }
 }
 
@@ -324,8 +329,8 @@ $totalbill = $totallaundry + $restbill + $totalcharge + $totalotherservices;
                                                 <option value="Credit">Credit</option>
                                                 <option value="Cheque">Cheque</option>
                                                 <option value="Visa Card">Visa Card</option>
-                                                <option value="Lumicash">Lumicash</option>
-                                                <option value="Ecocash">Ecocash</option>
+                                                <option value="Bank">Bank</option>
+                                                <option value="mobile money">Mobile Money</option>
                                             </select>
                                         </div>
 

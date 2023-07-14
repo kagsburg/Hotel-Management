@@ -183,7 +183,7 @@ function getForexConvertedAmount($currencyrate, $amount)
                                         $row1 =  mysqli_fetch_array($roomtypes);
                                         $roomtype = $row1['roomtype'];
                                         $dollarcharge = $row1['charge'];
-                                        $charge = getForexConvertedAmount($currencyrate, $dollarcharge);
+                                        $charge = $dollarcharge;
                                         $total = $charge * $nights;
                                         $totalvat = ((($total - $totalreduction) * $vat));
                                         $htva = $total - $totalvat - $totalreduction;
@@ -224,12 +224,12 @@ function getForexConvertedAmount($currencyrate, $amount)
                             </tr>
                             <tr>
                                 <td>REDUCTION: </td>
-                                <td><?php echo number_format(getForexConvertedAmount($currencyrate, $reduction)) . " " . $currency; ?></td>
+                                <td><?php echo number_format($reduction) . " " . $currency; ?></td>
                             </tr>
                         <?php
                             $totalcharge = $dollarCharge * $nights;
                             $totalcharge -= $reduction;
-                            $totalcharge = getForexConvertedAmount($currencyrate, $totalcharge);
+                            // $totalcharge = getForexConvertedAmount($currencyrate, $totalcharge);
                         } ?>
                         <tr>
                             <td><strong>TOTAL :</strong></td>
@@ -282,8 +282,8 @@ function getForexConvertedAmount($currencyrate, $amount)
                                     } else {
                                         $rate = 1;
                                     }
-                                    $reduction = $row3['reduction'] * $rate;
-                                    $price = $row3['price'] * $rate;
+                                    $reduction = intval($row3['reduction']) * $rate;
+                                    $price = intval($row3['price']) * $rate;
                                     $timestamp = $row3['timestamp'];
                                     $subtotal = $price - $reduction;
                                     $totalotherservices = $totalotherservices + $subtotal;
@@ -411,7 +411,7 @@ function getForexConvertedAmount($currencyrate, $amount)
                         $status = $row['status'];
                         $creator = $row['creator'];
                         $invoice_no = 23 * $id;
-                        $charge = getForexConvertedAmount(1, $row['charge']);
+                        $charge =$row['charge'];
                         $reservation = mysqli_query($con, "SELECT * FROM reservations WHERE reservation_id='$reserve_id'");
                         $row2 =  mysqli_fetch_array($reservation);
                         $firstname = $row2['firstname'];
@@ -421,7 +421,14 @@ function getForexConvertedAmount($currencyrate, $amount)
                         $getpackage = mysqli_query($con, "SELECT * FROM laundrypackages WHERE status='1' AND laundrypackage_id='$package_id'");
                         $row3 = mysqli_fetch_array($getpackage);
                         $laundrypackage = $row3['laundrypackage'];
-                        $totallaundry = $totallaundry + $charge;
+                        $totallaundry = 0;
+                        $getlaundry2 = mysqli_query($con, "SELECT * FROM laundry WHERE reserve_id='$reserve_id' AND timestamp='$timestamp' AND status='1'");
+                        
+                        while ($row4 = mysqli_fetch_array($getlaundry2)) {
+                            $totallaundry += $row4['clothes'] * $row4['charge'];
+                        }
+                        $totalvat = ((($totallaundry ) * $vat));
+                        $net = $totalvat + $totallaundry;
                     ?>
                         <div class="table-responsive m-t">
                             <h3><i>Laundry Work on <?php echo date('d/m/Y', $timestamp); ?></i></h3>

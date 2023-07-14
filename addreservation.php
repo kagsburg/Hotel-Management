@@ -73,10 +73,10 @@ if (!isset($_SESSION['hotelsys'])) {
                     $email = mysqli_real_escape_string($con, trim($_POST['email']));
                     $idnumber = mysqli_real_escape_string($con, trim($_POST['idnumber']));
                     $occupation = mysqli_real_escape_string($con, trim($_POST['occupation']));
-                    $business = mysqli_real_escape_string($con, trim($_POST['business']));
+                    // $business = mysqli_real_escape_string($con, trim($_POST['business']));
                     $adults = mysqli_real_escape_string($con, trim($_POST['adults']));
                     $kids = mysqli_real_escape_string($con, trim($_POST['kids']));
-                    $widebed = mysqli_real_escape_string($con, trim($_POST['widebed']));
+                    // $widebed = mysqli_real_escape_string($con, trim($_POST['widebed']));
                     $origin = mysqli_real_escape_string($con, trim($_POST['origin']));
                     $dob = mysqli_real_escape_string($con, trim($_POST['dob']));
                     $room = mysqli_real_escape_string($con, trim($_POST['room']));
@@ -84,10 +84,10 @@ if (!isset($_SESSION['hotelsys'])) {
                     $arrivaltime = mysqli_real_escape_string($con, trim($_POST['arrivaltime']));
                     $arrivingfrom = mysqli_real_escape_string($con, trim($_POST['arrivingfrom']));
                     $departuretime = mysqli_real_escape_string($con, trim($_POST['departuretime']));;
-                    $fax = mysqli_real_escape_string($con, trim($_POST['fax']));
+                    // $fax = mysqli_real_escape_string($con, trim($_POST['fax']));
                     $advance = mysqli_real_escape_string($con, trim($_POST['advance']));
                     $reduction = "";// mysqli_real_escape_string($con, trim($_POST['reduction']));
-                    $currency = mysqli_real_escape_string($con, trim($_POST['currency']));
+                    $currency = 'TSHS';
                     $checkout = mysqli_real_escape_string($con,  strtotime($_POST['checkout']));
                     if ((empty($fname)) || (empty($lname)) || (empty($phone)) || (empty($room)) || (empty($checkin))
                       || (empty($checkout))

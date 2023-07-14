@@ -1,6 +1,6 @@
 <?php
 include 'includes/conn.php';
-if (($_SESSION['hotelsyslevel'] != 1) && ($_SESSION['sysrole'] != 'Restaurant Attendant') && ($_SESSION['sysrole'] != 'Accountant'&& $_SESSION['sysrole'] != 'Marketing and Events')) {
+if (($_SESSION['hotelsyslevel'] != 1) && ($_SESSION['sysrole'] != 'Restaurant Attendant') && ($_SESSION['sysrole'] != 'Accountant'&& $_SESSION['sysrole'] != 'Marketing and Events' && $_SESSION['sysrole'] != 'Kitchen Exploitation Officer')) {
   header('Location:login.php');
 }
 $order_id = $_GET['id'];
@@ -226,8 +226,8 @@ if (strlen($count) >= 4) {
               <tr>
                 <th>ITEM</th>
                 <th>QTY</th>
-                <th>PUHTVA</th>
-                <th>PTHTVA</th>
+                <th>Unit Price</th>
+                <th>Sub Total</th>
               </tr>
             </thead>
             <tbody>
@@ -251,7 +251,7 @@ if (strlen($count) >= 4) {
                 $pthtva = $puhtva * $quantity;
                 $total = ($total + $pthtva);
                 $vatamount = $tva * $quantity;
-                $totaltax = $totaltax + $vatamount;
+                $totaltax = ($total * 0.18);
               ?>
                 <tr>
                   <td>
@@ -289,7 +289,7 @@ if (strlen($count) >= 4) {
             <tr>
 
               <td><strong>NET :</strong></td>
-              <td><strong><?php echo number_format($totaltax + $total); ?></strong></td>
+              <td><strong><?php echo number_format( $total); ?></strong></td>
             </tr>
           </tbody>
         </table>

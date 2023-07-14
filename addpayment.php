@@ -182,7 +182,14 @@ $id = $_GET['id'];
                $getpackage = mysqli_query($con, "SELECT * FROM laundrypackages WHERE status='1' AND laundrypackage_id='$package_id'");
                $row3 = mysqli_fetch_array($getpackage);
                $laundrypackage = $row3['laundrypackage'];
-               $totallaundry = $totallaundry + $row['charge'];
+               $totallaundry = 0;
+               $getlaundry2 = mysqli_query($con, "SELECT * FROM laundry WHERE reserve_id='$reserve_id' AND timestamp='$timestamp' AND status='1'");
+               
+               while ($row4 = mysqli_fetch_array($getlaundry2)) {
+                   $totallaundry += $row4['clothes'] * $row4['charge'];
+               }
+               // $totalvat = ((($totallaundry ) * $vat));
+               // $net = $totalvat + $totallaundry;
            }
        }
 
@@ -292,8 +299,8 @@ $id = $_GET['id'];
                                     <option value="Credit">Credit</option>
                                     <option value="Cheque">Cheque</option>
                                     <option value="Visa Card">Visa Card</option>
-                                    <option value="Lumicash">Lumicash</option>
-                                    <option value="Ecocash">Ecocash</option>
+                                    <option value="Bank">Bank</option>
+                                    <option value="mobile money">Mobile Money</option>
                                  </select>
                               </div>
                               <div class="form-group" id="data_1">

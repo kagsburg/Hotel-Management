@@ -124,12 +124,12 @@ $id = $_GET['id'];
                                             </div>
                                             <div class="feed-element">
                                                 <div class="media-body ">
-                                                    <strong>Total Bill</strong> : $ <?php echo number_format($totalbill); ?> <br>
+                                                    <strong>Total Bill</strong> : TSHS <?php echo number_format($totalbill); ?> <br>
                                                 </div>
                                             </div>
                                             <div class="feed-element">
                                                 <div class="media-body ">
-                                                    <strong>Paid Amount</strong> : $ <?php echo number_format($paidamount); ?> <br>
+                                                    <strong>Paid Amount</strong> : TSHS <?php echo number_format($paidamount); ?> <br>
                                                 </div>
                                             </div>
                                         </div>
@@ -141,7 +141,7 @@ $id = $_GET['id'];
                             <div class="ibox float-e-margins">
                                 <div class="ibox-title">
                                     <h5>Add Details</h5>
-                                    <label class="label label-danger pull-right" style="font-size: 14px">Balance :USD 
+                                    <label class="label label-danger pull-right" style="font-size: 14px">Balance : TSHS
                                     <?php echo number_format($totalbill - $paidamount); ?></label>
                                 </div>
                                 <div class="ibox-content">
@@ -188,8 +188,8 @@ $id = $_GET['id'];
                                     <option value="Credit">Credit</option>
                                     <option value="Cheque">Cheque</option>
                                     <option value="Visa Card">Visa Card</option>
-                                    <option value="Lumicash">Lumicash</option>
-                                    <option value="Ecocash">Ecocash</option>
+                                    <option value="bank">Bank</option>
+                                    <option value="mobile money">Mobile Money</option>
                                  </select>
                               </div>
                                         <div class="form-group" id="data_1">
