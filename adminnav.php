@@ -412,13 +412,7 @@ if ((isset($_SESSION['lan'])) && ($_SESSION['lan'] == 'fr')) {
             <li><a href="issuestock">Issue Stock</a></li>
             <li><a href="measurements">Item Measurements</a></li>
             <li><a href="categories">Item Categories</a></li>
-            <li>
-                <a href="">Requisitions<span class="fa arrow"></span></a>
-                <ul class="nav nav-third-level">
-                    <li><a href="requisitions">View Requisitions</a></li>
-                    <!-- <li><a href="addrequisition">Add Requisition</a></li> -->
-                </ul>
-            </li>
+           
             <li><a href="suppliers">Suppliers</a></li>
             <li><a href="#">Item Losses<span class="fa arrow"></span></a>
                 <ul class="nav nav-third-level">
@@ -432,7 +426,13 @@ if ((isset($_SESSION['lan'])) && ($_SESSION['lan'] == 'fr')) {
             </li>
         </ul>
     </li>
-
+    <li>
+                <a href="">Requisitions<span class="fa arrow"></span></a>
+                <ul class="nav nav-third-level">
+                    <li><a href="requisitions">View Requisitions</a></li>
+                    <!-- <li><a href="addrequisition">Add Requisition</a></li> -->
+                </ul>
+            </li>
     <li>
         <a href="departments"><i class="fa fa-building-o"></i> <span class="nav-label">Departments & Designations </span></a>
     </li>

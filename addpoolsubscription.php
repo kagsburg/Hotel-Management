@@ -136,12 +136,13 @@ if (!isset($_SESSION['hotelsys'])) {
                                                             <select name="reserve" class="form-control">
                                                                 <option value="0" selected="selected">Select Resident</option>
                                                                     <?php
-                        $oldsubs = mysqli_query($con, "SELECT * FROM poolsubscriptions WHERE status='1' ORDER BY firstname");
+                        $oldsubs = mysqli_query($con, "SELECT * FROM reservations WHERE status='1' ORDER BY firstname");
         while ($row =  mysqli_fetch_array($oldsubs)) {
             $firstname1 = $row['firstname'];
             $lastname1 = $row['lastname'];
             $phone = $row['phone'];
-            $poolsubscription_id= $row['poolsubscription_id']
+            $room_id = $row['room_id'];
+            $poolsubscription_id= $row['reservation_id']
             ?>
                                                                 <option value="<?php echo $poolsubscription_id; ?>">
                                                                 <?php echo $firstname1 . ' ' . $lastname1;  ?></option>

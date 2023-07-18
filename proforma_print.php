@@ -193,7 +193,7 @@ $currencyrate = 1;
                                         $getpayments = mysqli_query($con, "SELECT SUM(amount) AS totalpaid FROM payments WHERE reservation_id='$id' and status='1'");
         $payrow = mysqli_fetch_array($getpayments);
         $paidamount = $payrow['totalpaid'];
-        $advance = empty($advance) ? $paidamount : $advance;
+        $advance = empty($advance) ? $paidamount : ($paidamount==0 ? $advance : $paidamount);
                                         echo $roomtype;
                                         ?></td>
                                 <td><?php echo date('d/m/Y', $checkin); ?></td>
@@ -350,7 +350,7 @@ $currencyrate = 1;
                                     while ($row3 =  mysqli_fetch_array($foodsordered)) {
                                         $restorder_id = $row3['restorder_id'];
                                         $food_id = $row3['food_id'];
-                                        $price = getForexConvertedAmount(1, $row3['foodprice']);
+                                        $price =  $row3['foodprice'];
                                         $quantity = $row3['quantity'];
                                         //                      $type=$row3['type'];
 
@@ -387,7 +387,7 @@ $currencyrate = 1;
                                     <?php
                                     $totalcharges = mysqli_query($con, "SELECT COALESCE(SUM(foodprice*quantity), 0) AS totalcosts FROM restaurantorders WHERE order_id='$order_id'");
                                     $row =  mysqli_fetch_array($totalcharges);
-                                    $totalrestcosts = getForexConvertedAmount($currencyrate, $row['totalcosts']);
+                                    $totalrestcosts = $row['totalcosts'];
                                     $restbill = $totalrestcosts + $restbill;
                                     ?>
                                     <td><strong>TOTAL :</strong></td>

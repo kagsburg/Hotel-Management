@@ -416,6 +416,7 @@ if ((isset($_SESSION['lan'])) && ($_SESSION['lan'] == 'fr')) {
                         <li><a href="addrequisition">Add Requisition</a></li>
                      </ul>
                   </li>
+                  <li><a href="issuedstock"><i class="fa fa-suitcase"></i>Issued Stock</a></li>
 
                   <li>
                      <a href=""><i class="fa fa-bar-chart-o"></i> <span class="nav-label">Reports</span> <span class="fa arrow"></span></a>
@@ -462,14 +463,14 @@ if ((isset($_SESSION['lan'])) && ($_SESSION['lan'] == 'fr')) {
                     </li>
                 </ul>
             </li>
+            <li>
+               <a href=""><i class="fa fa-shopping-cart"></i> <span class="nav-label">Requisitions <span class="fa arrow"></span></a>
+               <ul class="nav nav-second-level">
+                  <li><a href="requisitions">View Requisitions</a></li>
+                  <li><a href="addrequisition">Add Requisition</a></li>
+               </ul>
+            </li>
             <li><a href="issuedstock"><i class="fa fa-suitcase"></i>Issued Stock</a></li>
-                  <li>
-                     <a href=""><i class="fa fa-shopping-cart"></i> <span class="nav-label">Requisitions <span class="fa arrow"></span></a>
-                     <ul class="nav nav-second-level">
-                        <li><a href="requisitions">View Requisitions</a></li>
-                        <li><a href="addrequisition">Add Requisition</a></li>
-                     </ul>
-                  </li>
                   <li>
                      <a href=""><i class="fa fa-bar-chart-o"></i> <span class="nav-label">Reports</span> <span class="fa arrow"></span></a>
                      <ul class="nav nav-second-level">
@@ -508,6 +509,7 @@ if ((isset($_SESSION['lan'])) && ($_SESSION['lan'] == 'fr')) {
                         <li><a href="addrequisition">Add Requisition</a></li>
                      </ul>
                   </li>
+                  <li><a href="issuedstock"><i class="fa fa-suitcase"></i>Issued Stock</a></li>
                   <li>
                      <a href=""><i class="fa fa-bar-chart-o"></i> <span class="nav-label">Reports</span> <span class="fa arrow"></span></a>
                      <ul class="nav nav-second-level">
@@ -656,6 +658,7 @@ if ((isset($_SESSION['lan'])) && ($_SESSION['lan'] == 'fr')) {
                         <li><a href="addrequisition">Add Requisition</a></li>
                      </ul>
                   </li>
+                  <li><a href="issuedstock"><i class="fa fa-suitcase"></i>Issued Stock</a></li>
                   <li>
                      <a href=""><i class="fa fa-bar-chart-o"></i> <span class="nav-label">Reports</span> <span class="fa arrow"></span></a>
                      <ul class="nav nav-second-level">
@@ -732,6 +735,7 @@ if ((isset($_SESSION['lan'])) && ($_SESSION['lan'] == 'fr')) {
                         <li><a href="addrequisition">Add Requisition</a></li>
                      </ul>
                   </li>
+                  <li><a href="issuedstock"><i class="fa fa-suitcase"></i>Issued Stock</a></li>
                   <!--                    <li>
                         <a href="getincomestatement"><i class="fa fa-money"></i><span class="nav-label">Income Statement</span></a>
                     </li>-->
@@ -778,6 +782,7 @@ if ((isset($_SESSION['lan'])) && ($_SESSION['lan'] == 'fr')) {
                         <li><a href="addrequisition">Add Requisition</a></li>
                      </ul>
                   </li>
+                  <li><a href="issuedstock"><i class="fa fa-suitcase"></i>Issued Stock</a></li>
                   <li>
                      <a href=""><i class="fa fa-bar-chart-o"></i> <span class="nav-label">Reports</span> <span class="fa arrow"></span></a>
                      <ul class="nav nav-second-level">
@@ -801,6 +806,7 @@ if ((isset($_SESSION['lan'])) && ($_SESSION['lan'] == 'fr')) {
                         <li><a href="addrequisition">Add Requisition</a></li>
                      </ul>
                   </li>
+                  <li><a href="issuedstock"><i class="fa fa-suitcase"></i>Issued Stock</a></li>
                   <li>
                      <a href=""><i class="fa fa-bar-chart-o"></i> <span class="nav-label">Reports</span> <span class="fa arrow"></span></a>
                      <ul class="nav nav-second-level">
@@ -825,7 +831,7 @@ if ((isset($_SESSION['lan'])) && ($_SESSION['lan'] == 'fr')) {
                         <li><a href="addrequisition">Add Requisition</a></li>
                      </ul>
                   </li>
-            <li><a href="issuedstock"><i class="fa fa-suitcase"></i>Issued Stock</a></li>
+                  <li><a href="issuedstock"><i class="fa fa-suitcase"></i>Issued Stock</a></li>
 
                   <li>
                      <a href=""><i class="fa fa-bar-chart-o"></i> <span class="nav-label">Reports</span> <span class="fa arrow"></span></a>
@@ -854,6 +860,7 @@ if ((isset($_SESSION['lan'])) && ($_SESSION['lan'] == 'fr')) {
                         <li><a href="addrequisition">Add Requisition</a></li>
                      </ul>
                   </li>
+                  <li><a href="issuedstock"><i class="fa fa-suitcase"></i>Issued Stock</a></li>
                <?php }
                if ($role == 'Kitchen Exploitation Officer') { ?>
                   <li>
@@ -965,6 +972,7 @@ if ((isset($_SESSION['lan'])) && ($_SESSION['lan'] == 'fr')) {
                         <li><a href="addrequisition">Add Requisition</a></li>
                      </ul>
                   </li>
+                  <li><a href="issuedstock"><i class="fa fa-suitcase"></i>Issued Stock</a></li>
                   
                <?php }
 

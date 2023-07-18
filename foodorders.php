@@ -319,8 +319,8 @@ if (!isset($_SESSION['hotelsys'])) {
                                         <option value="Credit">Credit</option>
                                         <option value="Cheque">Cheque</option> 
                                         <option value="Visa Card">Visa Card</option> 
-                                        <option value="Lumicash">Lumicash</option>
-                                        <option value="Ecocash">Ecocash</option>
+                                        <option value="Bank">Bank</option>
+                                        <option value="mobile money">Mobile Money</option>
                                     </select>
                                 </div>
                                 <div class="forcredit" style="display:none">

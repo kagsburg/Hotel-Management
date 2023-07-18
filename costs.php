@@ -195,7 +195,11 @@ if (!isset($_SESSION['hotelsys'])) {
                                                                 echo $fullname; ?> </div>
                                                         </td>
                                                         <td>
+                                                            <?php
+                                                                if ($_SESSION['hotelsyslevel']==1){
+                                                            ?>
                                                             <a href="editcost?id=<?php echo $cost_id; ?>" class="btn btn-xs btn-info"><i class="fa fa-edit"></i> Edit</a>
+                                                            <?php } ?>
                                                             <a href="hidecost?id=<?php echo $cost_id; ?>" class="btn btn-xs btn-danger" onclick="return confirm_delete<?php echo $cost_id; ?>()"><i class="fa fa-delete"></i>Remove</a>
                                                             <script type="text/javascript">
                                                                 function confirm_delete<?php echo $cost_id; ?>() {
