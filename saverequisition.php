@@ -12,6 +12,7 @@ if (isset($_SESSION["reqproducts"]) && count($_SESSION["reqproducts"]) > 0) {
     $requisition_id = add_requisition($pdo, [
         'user_id' => $user_id,
         'status' => 0,
+        'requisition_date'=>date('Y-m-d H:i:s'),
     ]);
     foreach ($_SESSION["reqproducts"] as $product) { //loop though items and prepare html content			
         $menuitem = $product["menuitem"];

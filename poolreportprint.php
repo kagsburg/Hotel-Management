@@ -42,7 +42,7 @@ $end = strtotime($_GET['end']);
         <div class="wrapper wrapper-content p-xl">
             <div class="ibox-content p-xl">
                 <div class="row">
-                    <div class="col-xs-2"><img src="img/sitelogo.jpg" class="img img-responsive"></div>
+                    <div class="col-xs-2"><img src="img/sitelogo.<?php echo $logo; ?>" class="img img-responsive"></div>
 
 
                 </div>
@@ -71,7 +71,7 @@ $end = strtotime($_GET['end']);
                                 <th>Package</th>
                                 <th>Reduction</th>
                                 <th>Charge</th>
-                                <th>HTVA</th>
+                                <!-- <th>HTVA</th> -->
                                 <th>VAT</th>
                                 <th>NET</th>
                              </tr>
@@ -138,7 +138,7 @@ $end = strtotime($_GET['end']);
                                    <td><?php echo $package; ?></td>
                                    <td><?php echo $reduction; ?></td>
                                    <td><?php echo $charge; ?></td>
-                                   <td><?php echo number_format($htva); ?></td>
+                                   <!-- <td><?php echo number_format($htva); ?></td> -->
                                    <td><?php echo number_format($vatamount); ?></td>
                                    <td><?php echo number_format($net); ?></td>
                                 </tr>
@@ -151,7 +151,7 @@ $end = strtotime($_GET['end']);
                                    <th></th>
                                    <th><?php echo number_format($totalred); ?></th>
                                    <th><?php echo number_format($total); ?></th>
-                                   <th><?php echo number_format($totalhtva); ?></th>
+                                   <!-- <th><?php echo number_format($totalhtva); ?></th> -->
                                    <th><?php echo number_format($totalvat); ?></th>
                                    <th><?php echo number_format($totalcosts); ?></th>
                                 </tr>

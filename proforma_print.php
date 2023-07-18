@@ -17,15 +17,15 @@ $lastname1 = $row['lastname'];
 $currency = $row['currency'];
 $advance = $row['advance'];
 $currencyrate = 1;
-if (!empty($currency) && $currency !== "USD") {
-    $getcurrencies = mysqli_query($con, "SELECT * FROM rates WHERE currency='$currency' AND status='1'");
-    $curow = mysqli_fetch_array($getcurrencies);
-    $currencyrate = $curow["rate"];
-}
-function getForexConvertedAmount($currencyrate, $amount)
-{
-    return intval($amount) * floatval($currencyrate);
-}
+// if (!empty($currency) && $currency !== "USD") {
+//     $getcurrencies = mysqli_query($con, "SELECT * FROM rates WHERE currency='$currency' AND status='1'");
+//     $curow = mysqli_fetch_array($getcurrencies);
+//     $currencyrate = $curow["rate"];
+// }
+// function getForexConvertedAmount($currencyrate, $amount)
+// {
+//     return intval($amount) * floatval($currencyrate);
+// }
 
 ?>
 <!DOCTYPE html>
@@ -189,7 +189,11 @@ function getForexConvertedAmount($currencyrate, $amount)
                                         $htva = $total - $totalvat - $totalreduction;
                                         $net = $htva + $totalvat;
                                         //if advance is null 
-        $advance = empty($advance) ? 0 : $advance;
+                                        // $advance = empty($advance) ? 0 : $advance;
+                                        $getpayments = mysqli_query($con, "SELECT SUM(amount) AS totalpaid FROM payments WHERE reservation_id='$id' and status='1'");
+        $payrow = mysqli_fetch_array($getpayments);
+        $paidamount = $payrow['totalpaid'];
+        $advance = empty($advance) ? $paidamount : $advance;
                                         echo $roomtype;
                                         ?></td>
                                 <td><?php echo date('d/m/Y', $checkin); ?></td>
@@ -428,7 +432,7 @@ function getForexConvertedAmount($currencyrate, $amount)
                             $totallaundry += $row4['clothes'] * $row4['charge'];
                         }
                         $totalvat = ((($totallaundry ) * $vat));
-                        $net = $totalvat + $totallaundry;
+                        $net =  $totallaundry;
                     ?>
                         <div class="table-responsive m-t">
                             <h3><i>Laundry Work on <?php echo date('d/m/Y', $timestamp); ?></i></h3>

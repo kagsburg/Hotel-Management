@@ -1,6 +1,6 @@
 <?php
 include 'includes/conn.php';
-if (($_SESSION['hotelsyslevel'] != 1) && ($_SESSION['sysrole'] != "Bar attendant") && ($_SESSION['sysrole'] != 'Restaurant Attendant')&& ($_SESSION['sysrole'] != 'Kitchen Exploitation Officer')) {
+if (($_SESSION['hotelsyslevel'] != 1) && ($_SESSION['sysrole'] != "Bar attendant") && ($_SESSION['sysrole'] != 'Restaurant Attendant')&& ($_SESSION['sysrole'] != 'Kitchen Exploitation Officer')&& ($_SESSION['sysrole'] != 'Accountant')) {
     header('Location:login.php');
 }
 ?>
@@ -111,7 +111,7 @@ if (($_SESSION['hotelsyslevel'] != 1) && ($_SESSION['sysrole'] != "Bar attendant
 
                         </div>
                         <ul class="nav navbar-top-links navbar-right">
-                            <li> <a href="switchlanguage?lan=fr">Francais</a> </li>
+                            <!-- <li> <a href="switchlanguage?lan=fr">Francais</a> </li> -->
                             <li><a href="switchlanguage?lan=en">English</a> </li>
                         </ul>
 

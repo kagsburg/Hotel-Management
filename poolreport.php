@@ -117,7 +117,7 @@ $end = strtotime($en);
                                              <th>Package</th>
                                              <th>Reduction</th>
                                              <th>Charge</th>
-                                             <th>HTVA</th>
+                                             <!-- <th>HTVA</th> -->
                                              <th>VAT</th>
                                              <th>NET</th>
                                           </tr>
@@ -182,7 +182,7 @@ $end = strtotime($en);
                                                 <td><?php echo $package; ?></td>
                                                 <td><?php echo $reduction; ?></td>
                                                 <td><?php echo $charge; ?></td>
-                                                <td><?php echo number_format($htva); ?></td>
+                                                <!-- <td><?php echo number_format($htva); ?></td> -->
                                                 <td><?php echo number_format($vatamount); ?></td>
                                                 <td><?php echo number_format($net); ?></td>
                                              </tr>
@@ -196,7 +196,7 @@ $end = strtotime($en);
                                                 <th></th>
                                                 <th><?php echo number_format($totalred); ?></th>
                                                 <th><?php echo number_format($total); ?></th>
-                                                <th><?php echo number_format($totalhtva); ?></th>
+                                                <!-- <th><?php echo number_format($totalhtva); ?></th> -->
                                                 <th><?php echo number_format($totalvat); ?></th>
                                                 <th><?php echo number_format($totalcosts); ?></th>
                                              </tr>

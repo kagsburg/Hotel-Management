@@ -87,31 +87,31 @@ $id = $_GET['id'];
                         <img src="img/sitelogo.<?php echo $logo; ?>" class="img img-responsive" width="60">
                         <div class="w-100" style="margin-top: 6px;">
                             <div class="d-flex" style="justify-content: space-between;">
-                                <span>NIF: 4000058109</span>
-                                <span>Centre fiscal: DGC</span>
+                                <span></span>
+                                <span>Chato Beach Resort Company Limited</span>
                             </div>
                             <div class="d-flex" style="justify-content: space-between;">
-                                <span>R.C:82336</span>
-                                <span>Secteur d’activités: Hôtellerie</span>
+                                <span></span>
+                                <span>TIN: 136073761</span>
                             </div>
                             <div class="d-flex" style="justify-content: space-between;">
-                                <span>BP: 5970 kinindo</span>
-                                <span>Forme juridique: SURL</span>
+                                <span></span>
+                                <span>P.O Box 54 Chato, Geita</span>
                             </div>
                             <div class="d-flex" style="justify-content: space-between;">
-                                <span>Tel: +257 61 15 55 55</span>
-                                <span>Assujetti à la TVA: Oui</span>
+                                <span></span>
+                                <span>Tel: +255758301785</span>
                             </div>
                             <div class="d-flex" style="justify-content: space-between;">
-                                <span>Commune Muha, Zone Kinindo</span>
+                                <span></span>
                             </div>
                             <div class="d-flex" style="justify-content: space-between;">
-                                <span>Av: Av, du large, Ndamukiza-kinindo</span>
+                                <span></span>
                             </div>
                         </div>
                         <div class="col-xs-4"> </div>
                         <?php
-                        $vat = 10;
+                        $vat = 18;
                         $subscriptions = mysqli_query($con, "SELECT * FROM poolsubscriptions WHERE poolsubscription_id='$id'");
                         $row =  mysqli_fetch_array($subscriptions);
                         $poolsubscription_id = $row['poolsubscription_id'];
@@ -226,10 +226,7 @@ $id = $_GET['id'];
                                 <td style="text-align: right;"><?php echo number_format($reduction); ?></td>
                             </tr>
                         <?php } ?>
-                        <tr>
-                            <td>HTVA :</td>
-                            <td style="text-align: right;"><?php echo number_format($htva); ?></td>
-                        </tr>
+                       
                         <tr>
                             <td>VAT :</td>
                             <td style="text-align: right;"><?php echo number_format($totalvat); ?></td>
@@ -249,8 +246,8 @@ $id = $_GET['id'];
             </div>
             <div class="big-footer">
                 <div class="footer-text__block text-center">
-                    <span>Av, du large, Ndamukiza-kinindo• BP: 5970 kinindo• Bujumbura-Burundi• Tel (257) 22 27 36 36 /22274114/61155555</span> <br>
-                    <span>Email: info@kccburundi.org• Website: www.kccburundi.org• Compte Bancaire : 00301-0036242-01-01B­ANCOBU</span>
+                <span>Chato, Geita Tanzania• Tel (255) 0758301785 • VAT NO: 400297540</span> <br>
+                    <span>Email: info@chatobeachresort.com• Website: www.chatobeachresort.com</span>
                 </div>
             </div>
         </div>

@@ -426,7 +426,7 @@ if ((isset($_SESSION['lan'])) && ($_SESSION['lan'] == 'fr')) {
                         <li><a href="getlaundryreport">Laundry Report</a></li>
                      </ul>
                   </li>
-               <?php }
+         <?php }
                if ($role == 'Restaurant Attendant') { ?>
 
                   <li>
@@ -448,8 +448,21 @@ if ((isset($_SESSION['lan'])) && ($_SESSION['lan'] == 'fr')) {
                         </li>
                         <li><a href="addrestaurantorder">Add Restaurant Order</a></li>
                         <li><a href="getrestinvoicesreport">Invoices Report</a></li>
+                        
                      </ul>
                   </li>
+                  <li>
+                <a href="#">Hall Buffets<span class="fa arrow"></span></a>
+                <ul class="nav nav-third-level">
+                    <li>
+                        <a href="addhallbuffet">Add Buffet</a>
+                    </li>
+                    <li>
+                        <a href="hallbuffets">View Buffets</a>
+                    </li>
+                </ul>
+            </li>
+            <li><a href="issuedstock"><i class="fa fa-suitcase"></i>Issued Stock</a></li>
                   <li>
                      <a href=""><i class="fa fa-shopping-cart"></i> <span class="nav-label">Requisitions <span class="fa arrow"></span></a>
                      <ul class="nav nav-second-level">
@@ -472,6 +485,8 @@ if ((isset($_SESSION['lan'])) && ($_SESSION['lan'] == 'fr')) {
                         <li><a href="conferencerooms">Conference Rooms</a></li>
                         <li><a href="addhallbooking">Add Hall booking</a></li>
                         <li><a href="hallbookings">Hall Bookings</a></li>
+                        <li><a href="issuedstock">Issued Stock</a></li>
+
                         <li>
                            <a href="#">Checked out <span class="fa arrow"></span></a>
                            <ul class="nav nav-third-level">
@@ -701,6 +716,7 @@ if ((isset($_SESSION['lan'])) && ($_SESSION['lan'] == 'fr')) {
                         <li><a href="getpoolreport">Gym and Pool Report</a></li>
                      </ul>
                   </li>
+                  <li><a href="addrestaurantorder">Add Restaurant Order</a></li>
                   <li>
                      <a href=""><i class="fa fa-suitcase"></i> <span class="nav-label">Inventory</span> <span class="fa arrow"></span></a>
                      <ul class="nav nav-second-level">
@@ -727,6 +743,7 @@ if ((isset($_SESSION['lan'])) && ($_SESSION['lan'] == 'fr')) {
                      <ul class="nav nav-second-level">
                         <li><a href="stockitems">View Inventory</a></li>
                         <li><a href="addstockitem">Add Stock Item</a></li>
+                        <li><a href="issuedstock">Issued Stock</a></li>
                         <li><a href="addstock">Add Stock</a></li>
                         <li><a href="issuestock">Issue Stock</a></li>
                         <li><a href="#">Purchase Lists<span class="fa arrow"></span></a>
@@ -752,6 +769,13 @@ if ((isset($_SESSION['lan'])) && ($_SESSION['lan'] == 'fr')) {
                               </li>
                            </ul>
                         </li>
+                     </ul>
+                  </li>
+                  <li>
+                     <a href=""><i class="fa fa-shopping-cart"></i> <span class="nav-label">Requisitions <span class="fa arrow"></span></a>
+                     <ul class="nav nav-second-level">
+                        <li><a href="requisitions">View Requisitions</a></li>
+                        <li><a href="addrequisition">Add Requisition</a></li>
                      </ul>
                   </li>
                   <li>
@@ -801,6 +825,8 @@ if ((isset($_SESSION['lan'])) && ($_SESSION['lan'] == 'fr')) {
                         <li><a href="addrequisition">Add Requisition</a></li>
                      </ul>
                   </li>
+            <li><a href="issuedstock"><i class="fa fa-suitcase"></i>Issued Stock</a></li>
+
                   <li>
                      <a href=""><i class="fa fa-bar-chart-o"></i> <span class="nav-label">Reports</span> <span class="fa arrow"></span></a>
                      <ul class="nav nav-second-level">
@@ -818,6 +844,7 @@ if ((isset($_SESSION['lan'])) && ($_SESSION['lan'] == 'fr')) {
                         <li><a href="addstockitem">Add Stock Item</a></li>
                         <li><a href="addstock">Add Stock</a></li>
                         <li><a href="issuestock">Issue Stock</a></li>
+                        <li><a href="issuedstock">Issued Stock</a></li>
                      </ul>
                   </li>
                   <li>
@@ -844,7 +871,17 @@ if ((isset($_SESSION['lan'])) && ($_SESSION['lan'] == 'fr')) {
                               </li>
                            </ul>
                         </li>
-
+                        <li>
+                <a href="#">Hall Buffets<span class="fa arrow"></span></a>
+                <ul class="nav nav-third-level">
+                    <li>
+                        <a href="addhallbuffet">Add Buffet</a>
+                    </li>
+                    <li>
+                        <a href="hallbuffets">View Buffets</a>
+                    </li>
+                </ul>
+            </li>
 
                         <li>
                            <a href="#">Restaurant orders<span class="fa arrow"></span></a>
@@ -904,7 +941,9 @@ if ((isset($_SESSION['lan'])) && ($_SESSION['lan'] == 'fr')) {
                         <!-- <li><a href="addkitchenstock">Add Kitchen Stock</a></li> -->
                         <li><a href="addstock">Add Stock</a></li>
                         <li><a href="issuestock">Issue Stock</a></li>
+
                         <li><a href="measurements">Item Measurements</a></li>
+                        <li><a href="issuedstock">Issued Stock</a></li>
                         <li><a href="categories">Item Categories</a></li>
                         <li><a href="suppliers">Suppliers</a></li>
                         <li><a href="#">Item Losses<span class="fa arrow"></span></a>
@@ -926,6 +965,7 @@ if ((isset($_SESSION['lan'])) && ($_SESSION['lan'] == 'fr')) {
                         <li><a href="addrequisition">Add Requisition</a></li>
                      </ul>
                   </li>
+                  
                <?php }
 
                //                    $reservrights=  mysqli_query($con, "SELECT * FROM user_roles WHERE role='6' AND user_id=user_id='".$_SESSION['hotelsys']."'");

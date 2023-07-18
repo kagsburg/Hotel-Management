@@ -233,9 +233,9 @@ if ((isset($_SESSION['lan'])) && ($_SESSION['lan'] == 'fr')) {
     <li>
         <a href=""><i class="fa fa-folder-open"></i> <span class="nav-label">Reservations</span> <span class="fa arrow"></span></a>
         <ul class="nav nav-second-level">
-            <li>
+            <!-- <li>
                 <a href="addreservation">Add Reservation</a>
-            </li>
+            </li> -->
             <li>
                 <a href="reservations">Pending Reservations</a>
             </li>
@@ -252,7 +252,7 @@ if ((isset($_SESSION['lan'])) && ($_SESSION['lan'] == 'fr')) {
                 </ul>
             </li>
             <li><a href="pendingouts">Pending Check Outs</a></li>
-            <li><a href="payments">Payments</a></li>
+            <!-- <li><a href="payments">Payments</a></li> -->
 
         </ul>
     </li>
@@ -292,15 +292,15 @@ if ((isset($_SESSION['lan'])) && ($_SESSION['lan'] == 'fr')) {
             <li>
                 <a href="#">Hall Buffets<span class="fa arrow"></span></a>
                 <ul class="nav nav-third-level">
-                    <li>
+                    <!-- <li>
                         <a href="addhallbuffet">Add Buffet</a>
-                    </li>
+                    </li> -->
                     <li>
                         <a href="hallbuffets">View Buffets</a>
                     </li>
                 </ul>
             </li>
-            <li><a href="addrestaurantorder">Add Order</a></li>
+            <!-- <li><a href="addrestaurantorder">Add Order</a></li> -->
             <li><a href="getrestinvoicesreport">Invoices Report</a></li>
         </ul>
     </li>
@@ -328,7 +328,7 @@ if ((isset($_SESSION['lan'])) && ($_SESSION['lan'] == 'fr')) {
         <a href=""><i class="fa fa-bookmark"></i> <span class="nav-label">Gym & Swimming Pool</span> <span class="fa arrow"></span></a>
         <ul class="nav nav-second-level">
             <li><a href="poolpackages">Bouquets</a></li>
-            <li><a href="addpoolsubscription">Add Subscription</a></li>
+            <!-- <li><a href="addpoolsubscription">Add Subscription</a></li> -->
             <li><a href="poolsubscriptions">Subscriptions</a></li>
 
         </ul>
@@ -337,7 +337,7 @@ if ((isset($_SESSION['lan'])) && ($_SESSION['lan'] == 'fr')) {
         <a href=""><i class="fa fa-female"></i> <span class="nav-label">Laundry</span> <span class="fa arrow"></span></a>
         <ul class="nav nav-second-level">
             <li><a href="laundrytypes">Laundry Packages</a></li>
-            <li><a href="addlaundry">Add Laundry work</a></li>
+            <!-- <li><a href="addlaundry">Add Laundry work</a></li> -->
             <li><a href="laundrywork">Laundry work</a></li>
         </ul>
     </li>
@@ -349,7 +349,7 @@ if ((isset($_SESSION['lan'])) && ($_SESSION['lan'] == 'fr')) {
             <li>
                 <a href="#">Hall Bookings<span class="fa arrow"></span></a>
                 <ul class="nav nav-third-level">
-                    <li><a href="addhallbooking">Add Hall booking</a></li>
+                    <!-- <li><a href="addhallbooking">Add Hall booking</a></li> -->
                     <li><a href="hallbookings">Hall Bookings</a></li>
                 </ul>
             </li>
@@ -379,7 +379,7 @@ if ((isset($_SESSION['lan'])) && ($_SESSION['lan'] == 'fr')) {
         <a href=""><i class="fa fa-arrow-down"></i> <span class="nav-label">Expenses</span> <span class="fa arrow"></span></a>
         <ul class="nav nav-second-level">
             <li><a href="costs">View Expenses</a></li>
-            <li><a href="addcost">Add Expense</a></li>
+            <!-- <li><a href="addcost">Add Expense</a></li> -->
         </ul>
     </li>
     <li>
@@ -408,7 +408,7 @@ if ((isset($_SESSION['lan'])) && ($_SESSION['lan'] == 'fr')) {
                 </ul>
             </li>
             <!-- <li><a href="addkitchenstock">Add Kitchen Stock</a></li> -->
-            <li><a href="addstock">Add Stock</a></li>
+            <!-- <li><a href="addstock">Add Stock</a></li> -->
             <li><a href="issuestock">Issue Stock</a></li>
             <li><a href="measurements">Item Measurements</a></li>
             <li><a href="categories">Item Categories</a></li>
@@ -416,15 +416,15 @@ if ((isset($_SESSION['lan'])) && ($_SESSION['lan'] == 'fr')) {
                 <a href="">Requisitions<span class="fa arrow"></span></a>
                 <ul class="nav nav-third-level">
                     <li><a href="requisitions">View Requisitions</a></li>
-                    <li><a href="addrequisition">Add Requisition</a></li>
+                    <!-- <li><a href="addrequisition">Add Requisition</a></li> -->
                 </ul>
             </li>
             <li><a href="suppliers">Suppliers</a></li>
             <li><a href="#">Item Losses<span class="fa arrow"></span></a>
                 <ul class="nav nav-third-level">
-                    <li>
+                    <!-- <li>
                         <a href="additemloss">Add Loss</a>
-                    </li>
+                    </li> -->
                     <li>
                         <a href="itemlosses">view Losses</a>
                     </li>
@@ -439,6 +439,7 @@ if ((isset($_SESSION['lan'])) && ($_SESSION['lan'] == 'fr')) {
     <li>
         <a href=""><i class="fa fa-bar-chart-o"></i> <span class="nav-label">Reports</span> <span class="fa arrow"></span></a>
         <ul class="nav nav-second-level">
+        <li><a href="getoverallreport"> Overall Report</a></li>
             <li><a href="getreservationreport">Reservations Report</a></li>
             <li><a href="getinventoryreport">Inventory Report</a></li>
             <li><a href="getstockreport">Stock Report</a></li>

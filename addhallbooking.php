@@ -208,6 +208,9 @@ if (!isset($_SESSION['hotelsys'])) {
                                                 <input type="text" name="reason" class="form-control" placeholder="Reason">
 
                                             </div>
+                                            <div class="form-group col-lg-6"><label class="control-label">Advance Payments (if any)</label>
+                                                <input type="text" name='advance' class="form-control" placeholder="Enter advance payments if any">
+                                            </div>
                                         </div>
                                         
 
@@ -493,9 +496,6 @@ if (!isset($_SESSION['hotelsys'])) {
                                                     <option value="Zimbabwe">Zimbabwe</option>
                                                 </select>
                                             </div>
-                                            <div class="form-group col-lg-6"><label class="control-label">Advance Payments (if any)</label>
-                                                <input type="text" name='advance' class="form-control" placeholder="Enter advance payments if any">
-                                            </div>
                                             <div class="form-group col-lg-6"><label class="control-label">Discount in TSHS</label>
                                                 <input type="te" name='discount' class="form-control" placeholder="Enter discount if any">
                                             </div>
@@ -529,7 +529,7 @@ if (!isset($_SESSION['hotelsys'])) {
                                                         </div>
                                                         <div class="form-group col-lg-4">
                                                             <label class="control-label">Quantity</label>
-                                                            <input type="number" class="form-control" name="buffet_quantity[]" required>
+                                                            <input type="number" class="form-control" name="buffet_quantity[]" >
                                                         </div>
 
 

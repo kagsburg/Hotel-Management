@@ -47,7 +47,7 @@ if (mysqli_num_rows($delivery) === 0) {
                 <?php
                 $count = 1;
                 $totalvat = 0;
-                $vat = 10;
+                $vat = 18;
                 $reservation = mysqli_query($con, "SELECT * FROM $reservetable WHERE  hallreservation_id='$id'");
                 $row =  mysqli_fetch_array($reservation);
                 $hallreservation_id = $row['hallreservation_id'];
@@ -90,8 +90,8 @@ if (mysqli_num_rows($delivery) === 0) {
                 $purposes = mysqli_query($con, "SELECT * FROM conferencerooms WHERE conferenceroom_id='$room_id'");
                 $rowc = mysqli_fetch_array($purposes);
                 $room = $rowc['room'];
-                $price = $days * $charge;
-                $vatamount = (($price * 10) / 100);
+                $price = $people * $charge;
+                $vatamount = (($price * 18) / 100);
                 // $charge = $price;
                 $totalvat += $vatamount;
                 ?>
@@ -100,49 +100,48 @@ if (mysqli_num_rows($delivery) === 0) {
                         <img src="img/sitelogo.<?php echo $logo; ?>" class="img img-responsive" width="140">
                     </div>
                     <div class="col-sm-9 pull-right" style="flex: 1">
-                        <h2 class="text-center mb-4"><strong>KING’S CONFERENCE CENTRE</strong></h2>
-                        <div class="d-flex" style="justify-content: space-between;">
-                            <span>NIF: 4000058109</span>
-                            <span>Centre fiscal: DGC</span>
-                        </div>
-                        <div class="d-flex" style="justify-content: space-between;">
-                            <span>R.C:82336</span>
-                            <span>Secteur d’activités: Hôtellerie</span>
-                        </div>
-                        <div class="d-flex" style="justify-content: space-between;">
-                            <span>BP: 5970 kinindo</span>
-                            <span>Forme juridique: SURL</span>
-                        </div>
-                        <div class="d-flex" style="justify-content: space-between;">
-                            <span>Tel: +257 61 15 55 55</span>
-                            <span>Assujetti à la TVA: Oui</span>
-                        </div>
-                        <div class="d-flex" style="justify-content: space-between;">
-                            <span>Commune Muha, Zone Kinindo</span>
-                        </div>
-                        <div class="d-flex" style="justify-content: space-between;">
-                            <span>Av: Av, du large, Ndamukiza-kinindo</span>
-                        </div>
-                    </div>
+                                        <h2 class="text-center mb-4"><strong><?php echo $hotelname; ?></strong></h2>
+                                        <div class="d-flex" style="justify-content: space-between;">
+                                            <span></span>
+                                            <span>Chato Beach Resort Company Limited</span>
+                                        </div>
+                                        <div class="d-flex" style="justify-content: space-between;">
+                                            <span></span>
+                                            <span>TIN: 136073761</span>
+                                        </div>
+                                        <div class="d-flex" style="justify-content: space-between;">
+                                            <span></span>
+                                            <span>P.O Box 54 Chato, Geita</span>
+                                        </div>
+                                        <div class="d-flex" style="justify-content: space-between;">
+                                            <span></span>
+                                            <span>Tel: +255758301785</span>
+                                        </div>
+                                        <div class="d-flex" style="justify-content: space-between;">
+                                            <span></span>
+                                        </div>
+                                        <div class="d-flex" style="justify-content: space-between;">
+                                            <span></span>
+                                        </div>
+                                    </div>
                 </div>
                 <div class="row" style="margin-top: 15px; margin-bottom: 15px;">
-                    <div class="col-xs-6">
-                        <address>
-                            <strong>
-                                Le client <br>
-                                Nom et prénom ou Raison Social:
-                            </strong>
-                            <?php echo $fullname; ?><br>
-                            <strong>Phone:</strong> <?php echo $phone; ?><br />
-                            <strong>Country: </strong><?php echo $country; ?><br />
-                            <span><strong>NIF:</strong></span><br>
-                            <span><strong>Salle:</strong> <?php echo $room; ?></span><br>
-                            <span><strong>Assujetti à la TVA:</strong> Oui Non</span><br>
-                            <span><strong>Doit pour ce qui suit:</strong></span><br>
-                            <span><strong>Invoice Date : </strong> <?php echo date('d/m/Y', $timenow); ?></span><br />
-                        </address>
-
-                    </div>
+                <div class="col-xs-6">
+                                        <address>
+                                            <strong>
+                                                Guest Customer <br>
+                                                
+                                            </strong>
+                                            <?php echo $fullname; ?><br>
+                                            <strong>Phone:</strong> <?php echo $phone; ?><br />
+                                            <strong>Country: </strong><?php echo $country; ?><br />
+                                            <!-- <span><strong>NIF:</strong></span><br> -->
+                                            <span><strong>Conference:</strong> <?php echo $room; ?></span><br>
+                                            <!-- <span><strong>Assujetti à la TVA:</strong> Oui Non</span><br>
+                                            <span><strong>Doit pour ce qui suit:</strong></span><br> -->
+                                            <span><strong>Invoice Date : </strong> <?php echo date('d/m/Y', $timenow); ?></span><br />
+                                        </address>
+                                    </div>
 
                     <div class="col-sm-6 text-right">
                         <h4 class="text-navy"># <?php echo str_pad($hallreservation_id, 6, "0", STR_PAD_LEFT); ?></h4>
@@ -160,7 +159,7 @@ if (mysqli_num_rows($delivery) === 0) {
                             <tr>
                                 <th>Item Type</th>
                                 <th>Type Name</th>
-                                <th>Days</th>
+                                <th>Number of People</th>
                                 <th>Unit Charge</th>
                                 <th>VAT</th>
                                 <th>Sub Total</th>
@@ -171,12 +170,12 @@ if (mysqli_num_rows($delivery) === 0) {
                             <tr>
                                 <td><strong>Room</strong> </td>
                                 <td><?php echo $room;  ?></td>
-                                <td><?php echo $days; ?></td>
+                                <td><?php echo $people; ?></td>
                                 <td><?php echo number_format($charge); ?></td>
                                 <td><?php echo $vatamount; ?></td>
                                 <td><?php
-                                    $roomtotal = ($charge * $days);
-                                    echo number_format($roomtotal + $vatamount); ?></td>
+                                    $roomtotal = ($charge * $people);
+                                    echo number_format($roomtotal); ?></td>
                             </tr>
                         </tbody>
                     </table>
@@ -239,7 +238,7 @@ if (mysqli_num_rows($delivery) === 0) {
                                         $buffettotal = $buffettotal + $buffetcharge;
 
 
-                                        echo number_format($buffetcharge + $vatamount); ?></td>
+                                        echo number_format($buffettotal ); ?></td>
                             </tr>
                         <?php } ?>
                         </tbody>
@@ -289,7 +288,7 @@ if (mysqli_num_rows($delivery) === 0) {
                                         <td><?php echo $days;  ?></td>
                                         <td><?php echo number_format($price); ?></td>
                                         <td><?php echo number_format($vatamount); ?></td>
-                                        <td><?php echo number_format($servicecharge + $vatamount); ?></td>
+                                        <td><?php echo number_format($servicecharge); ?></td>
                                     </tr>
 
                                 <?php } ?>
@@ -327,7 +326,7 @@ if (mysqli_num_rows($delivery) === 0) {
                                         <td><strong><?php echo $service;  ?></strong> </td>
                                         <td><?php echo number_format($price); ?></td>
                                         <td><?php echo number_format($vatamount); ?></td>
-                                        <td><?php echo number_format($price + $vatamount); ?></td>
+                                        <td><?php echo number_format($price ); ?></td>
                                     </tr>
 
                                 <?php } ?>
@@ -378,7 +377,7 @@ if (mysqli_num_rows($delivery) === 0) {
                 </div>
 
                 <?php
-                $name =  mysqli_query($con, "SELECT * FROM users WHERE user_id='" . $_SESSION['emp_id'] . "'");
+                $name =  mysqli_query($con, "SELECT * FROM users WHERE user_id='" . $_SESSION['hotelsys'] . "'");
                 $row =  mysqli_fetch_array($name);
                 $employee = $row['employee'];
                 $getemployee =  mysqli_query($con, "SELECT * FROM employees WHERE employee_id='$employee'");
@@ -395,8 +394,8 @@ if (mysqli_num_rows($delivery) === 0) {
             </div>
             <div class="big-footer">
                 <div class="footer-text__block text-center">
-                    <span>Av, du large, Ndamukiza-kinindo• BP: 5970 kinindo• Bujumbura-Burundi• Tel (257) 22 27 36 36 /22274114/61155555</span> <br>
-                    <span>Email: info@kccburundi.org• Website: www.kccburundi.org• Compte Bancaire : 00301-0036242-01-01B­ANCOBU</span>
+                <span>Chato, Geita Tanzania• Tel (255) 0758301785 • VAT NO: 400297540</span> <br>
+                    <span>Email: info@chatobeachresort.com• Website: www.chatobeachresort.com</span>
                 </div>
             </div>
         </div>

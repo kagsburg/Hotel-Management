@@ -1,8 +1,11 @@
 <?php
 include 'includes/conn.php';
-if (($_SESSION['hotelsyslevel'] != 1) && ($_SESSION['sysrole'] != 'Store Attendant')) {
-    header('Location:login');
+if (!isset($_SESSION['hotelsys'])) {
+    header('Location:login.php');
 }
+// if (($_SESSION['hotelsyslevel'] != 1) && ($_SESSION['sysrole'] != 'Store Attendant'&& $_SESSION['sysrole'] != 'Kitchen Exploitation Officer')) {
+//     header('Location:login');
+// }
 $id = $_GET['id'];
 $stock = mysqli_query($con, "SELECT * FROM stock_items WHERE stockitem_id='$id' ");
 $row =  mysqli_fetch_array($stock);

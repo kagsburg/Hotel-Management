@@ -24,7 +24,7 @@ if (!isset($_SESSION['hotelsys'])) {
       'Quantity',
       'Price',
       // 'Created By',
-      'HTVA',
+      // 'HTVA',
       'VAT',
       'Total Price',
    ];
@@ -47,6 +47,7 @@ if (!isset($_SESSION['hotelsys'])) {
       $creator = $row['creator'];
       $getyear = date('Y', $timestamp);
       $count = 1;
+      $vat = 18;
       $beforeorders =  mysqli_query($con, "SELECT * FROM laundry WHERE status IN (0,1) AND  laundry_id<'$laundry_id'") or die(mysqli_error($con));
       while ($rowb = mysqli_fetch_array($beforeorders)) {
          $timestamp2 = $rowb['timestamp'];
@@ -105,7 +106,7 @@ if (!isset($_SESSION['hotelsys'])) {
          $clothes,
          $charge,
          // $fullname,
-         $htva,
+         // $htva,
          $vatamount,
          $totalcharge,
       ];

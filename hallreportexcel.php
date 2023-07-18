@@ -39,10 +39,10 @@ if (!isset($_SESSION['hotelsys'])) {
       $country = $row['country'];
       $charge = $row['charge'];
       $creator = $row['creator'];
-      $vat = 10;
+      $vat = 18;
       $getdays = (($checkout - $checkin) / (24 * 3600)) + 1;
-      $vatamount = ($getdays * $charge * $vat) / 100;
-      $hallcost = ($charge * $getdays) + $vatamount;
+      $vatamount = ($people * $charge * $vat) / 100;
+      $hallcost = ($charge * $people) + $vatamount;
       $totalcosts += $hallcost;
 
       if (!empty($purpose)) {

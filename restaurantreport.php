@@ -98,7 +98,7 @@ $cat = $_GET['cat'];
                                                         <th>ITEM</th>
                                                         <th>QUANTITY</th>
                                                         <th>PRICE</th>
-                                                        <th>TVA</th>
+                                                        <!-- <th>TVA</th> -->
                                                         <th>TOTAL</th>
 
                                                     </tr>
@@ -128,13 +128,14 @@ $cat = $_GET['cat'];
                                                             $total = 0;
                                                             $net = 0;
 
-                                                            $restorders = mysqli_query($con, "SELECT * FROM orders WHERE status=2 AND timestamp>='$st' AND timestamp<='$en' ");
+                                                            $restorders = mysqli_query($con, "SELECT * FROM orders WHERE status IN (1,2) AND timestamp>='$st' AND timestamp<='$en' ");
                                                             if (mysqli_num_rows($restorders) > 0) {
                                                                 while ($row =  mysqli_fetch_array($restorders)) {
                                                                     $order_id = $row['order_id'];
                                                                     $guest = $row['guest'];
                                                                     $rtable = $row['rtable'];
-                                                                    $vat = $row['vat'];
+                                                                    // $vat = $row['vat'];
+                                                                    $vat= 18;
                                                                     $foodsordered =  mysqli_query($con, "SELECT * FROM restaurantorders WHERE food_id='$food_id'  AND order_id='$order_id'");
                                                                     if (mysqli_num_rows($foodsordered) > 0) {
                                                                         $row4 =  mysqli_fetch_array($foodsordered);
@@ -142,19 +143,20 @@ $cat = $_GET['cat'];
                                                                         $quantity = $row4['quantity'];
                                                                         $tax = $row4['tax'];
                                                                         if ($tax == 1) {
-                                                                            $puhtva = round($price / (($vat / 110) + 1));
+                                                                            $puhtva = round($price / (($vat / 100) + 1));
                                                                             $tva = $price - $puhtva;
                                                                         } else {
                                                                             $tva = 0;
                                                                             $puhtva = $price;
                                                                         }
                                                                         $pthtva = $puhtva * $quantity;
-                                                                        $total = ($total + $pthtva);
+                                                                        $total += $price;
                                                                         $vatamount = $tva * $quantity;
                                                                         $totaltax = $totaltax + $vatamount;
                                                                         $items = $items + $quantity;
-                                                                        $net = $totaltax + $total;
+                                                                       
                                                                     }
+                                                                    // $net += $price * $items;
                                                                 }
                                                             }
                                                             if ($items > 0) {
@@ -162,12 +164,13 @@ $cat = $_GET['cat'];
                                                                 <tr class="gradeA">
                                                                     <td> <?php echo $menuitem; ?></td>
                                                                     <td><?php echo $items; ?></td>
-                                                                    <td><?php echo number_format($total); ?></td>
-                                                                    <td><?php echo number_format($totaltax); ?></td>
-                                                                    <td><?php echo number_format($net); ?></td>
+                                                                    <td><?php echo number_format($price); ?></td>
+                                                                    <!-- <td><?php echo number_format($totaltax); ?></td> -->
+                                                                    <td><?php echo number_format($price * $items); ?></td>
                                                                 </tr>
 
                                                     <?php
+                                                                 $net += $price * $items;
                                                                 $totalitems = $totalitems + $items;
                                                                 $totalcharge = $totalcharge + $total;
                                                                 $totalvat = $totalvat + $totaltax;
@@ -181,7 +184,7 @@ $cat = $_GET['cat'];
                                                     <th>TOTAL</th>
                                                     <th><?php echo number_format($totalitems); ?></th>
                                                     <th><?php echo number_format($totalcharge); ?></th>
-                                                    <th><?php echo number_format($totalvat); ?></th>
+                                                    <!-- <th><?php echo number_format($totalvat); ?></th> -->
                                                     <th><?php echo number_format($totalnet); ?></th>
                                                 </tr>
 

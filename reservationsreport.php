@@ -72,6 +72,7 @@ $end = strtotime($en);
         $reservations = mysqli_query($con, $qry);
         if (mysqli_num_rows($reservations) > 0) {
             ?>
+            <div style="overflow-x:auto;">
                                                 <table class="table table-striped table-bordered table-hover dataTables-example">
                                                     <thead>
                                                         <tr>
@@ -156,12 +157,12 @@ $end = strtotime($en);
                 $row1 =  mysqli_fetch_array($roomtypes);
                 $roomtype = $row1['roomtype'];
                 $dollarCharge =  $row1['charge'];
-                $charge = getForexConvertedAmount($currencyrate, $dollarCharge);
+                $charge = $dollarCharge;
                 $totalcharge = $dollarCharge * $nights;
                 if (!empty($reduction)) {
                     $totalcharge -= $reduction;
                 }
-                $totalcharge = getForexConvertedAmount($currencyrate, $totalcharge);
+                // $totalcharge = getForexConvertedAmount($currencyrate, $totalcharge);
 
 
                 // $restbill = 0;
@@ -232,12 +233,15 @@ $end = strtotime($en);
                         } else {
                             $rate = 1;
                         }
-                        $reduction = $row3['reduction'] * $rate;
-                        $price = $row3['price'] * $rate;
+                        $reduction = intval($row3['reduction']) * $rate;
+                        $price = intval($row3['price']) * $rate;
                         $timestamp = $row3['timestamp'];
                         $subtotal = $price - $reduction;
                         $totalotherservices = $totalotherservices + $subtotal;
                     }
+                }else{
+                    $totalotherservices = 0;
+                    $otherservice = 0;
                 }
                 ?>
                                                                 </td>
@@ -275,6 +279,7 @@ $end = strtotime($en);
                                                         </tr>
                                                     </tbody>
                                                 </table>
+                                                </div>
                                             <?php } else { ?>
                                                 <div class="alert  alert-danger">Oops!! No Reservations Added Yet</div>
                                             <?php } ?>

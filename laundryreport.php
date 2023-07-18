@@ -108,7 +108,7 @@ $end = strtotime($en);
                                              <th>Items</th>
                                              <th>Quantity</th>
                                              <th>Price</th>
-                                             <th>HTVA</th>
+                                             <!-- <th>HTVA</th> -->
                                              <th>VAT</th>
                                              <th>Total Price</th>
                                           </tr>
@@ -116,7 +116,7 @@ $end = strtotime($en);
                                        <tbody>
                                           <?php
                                           while ($row =  mysqli_fetch_array($laundry)) {
-                                             $vat = 10;
+                                             $vat = 18;
                                              $laundry_id = $row['laundry_id'];
                                              $reserve_id = $row['reserve_id'];
                                              $clothes = $row['clothes'];
@@ -168,7 +168,7 @@ $end = strtotime($en);
 
                                              $totalcharge = $charge * $clothes;
 
-                                             $vatamount = (($totalcharge * $vat) / 110);
+                                             $vatamount = (($totalcharge * $vat) / 100);
 
                                              $htva = $totalcharge - $vatamount;
                                              $net = $htva + $vatamount;
@@ -190,7 +190,7 @@ $end = strtotime($en);
                                                    $fullname = $row['fullname'];
                                                    echo $fullname;  ?>
                                                 </td> -->
-                                                <td><?php echo number_format($htva); ?></td>
+                                                <!-- <td><?php echo number_format($htva); ?></td> -->
                                                 <td><?php echo number_format($vatamount); ?></td>
                                                 <td><?php echo number_format($totalcharge); ?></td>
                                              </tr>

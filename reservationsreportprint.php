@@ -42,7 +42,7 @@ $end = strtotime($_GET['end'])
         <div class="wrapper wrapper-content p-xl">
             <div class="ibox-content p-xl">
                 <div class="row">
-                    <div class="col-xs-2"><img src="assets/demo/pearllogo.png" class="img img-responsive"></div>
+                    <div class="col-xs-2"><img src="img/sitelogo.<?php echo $logo; ?>" class="img img-responsive"></div>
 
 
                 </div>

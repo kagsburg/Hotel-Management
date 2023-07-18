@@ -1,6 +1,6 @@
 <?php
 include 'includes/conn.php';
-if (($_SESSION['hotelsyslevel'] != 1) && ($_SESSION['sysrole'] != "Restaurant Attendant")&& ($_SESSION['sysrole'] != 'Kitchen Exploitation Officer')) {
+if (($_SESSION['hotelsyslevel'] != 1) && ($_SESSION['sysrole'] != "Restaurant Attendant")&& ($_SESSION['sysrole'] != 'Kitchen Exploitation Officer')&& ($_SESSION['sysrole'] != 'Accountant')) {
     header('Location:login.php');
 }
 $waiter = $_GET['waiter'];

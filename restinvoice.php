@@ -4,7 +4,11 @@ if (($_SESSION['hotelsyslevel'] != 1) && ($_SESSION['sysrole'] != 'Restaurant At
     header('Location:login.php');
 }
 $order_id = $_GET['id'];
-$restorder = mysqli_query($con, "SELECT * FROM orders WHERE status IN (1,2) AND order_id='$order_id'");
+$restorder = mysqli_query($con, "SELECT * FROM orders WHERE status IN (1,2) and order_id='$order_id'");
+if (mysqli_num_rows($restorder) == 0) {
+    header('Location:getrestaurantreport');
+    exit();
+}
 $row =  mysqli_fetch_array($restorder);
 $order_id = $row['order_id'];
 $guest = $row['guest'];
@@ -17,6 +21,10 @@ $creator = $row['creator'];
 $timestamp = $row['timestamp'];
 $getyear = date('Y', $timestamp);
 $count = 1;
+// get table name 
+$table = mysqli_query($con, "SELECT * FROM hoteltables WHERE hoteltable_id='$rtable' AND status='1'");
+$rowt = mysqli_fetch_array($table);
+$tablename = $rowt['table_no'];
 $beforeorders =  mysqli_query($con, "SELECT * FROM orders WHERE status IN (1,2) AND  order_id<'$order_id'") or die(mysqli_error($con));
 while ($rowb = mysqli_fetch_array($beforeorders)) {
     $timestamp2 = $rowb['timestamp'];
@@ -148,10 +156,15 @@ if (strlen($count) >= 4) {
                                                 </strong>
                                                 <?php
                                                 $reservation = mysqli_query($con, "SELECT * FROM reservations WHERE reservation_id='$guest'");
-                                                $row =  mysqli_fetch_array($reservation);
-                                                $firstname1 = $row['firstname'];
-                                                $lastname1 = $row['lastname'];
-                                                echo $firstname1 . ' ' . $lastname1;
+                                                if (mysqli_num_rows($reservation) > 0){
+                                                    $row =  mysqli_fetch_array($reservation);
+                                                    $firstname1 = $row['firstname'];
+                                                    $lastname1 = $row['lastname'];
+                                                    echo $firstname1 . ' ' . $lastname1;
+
+                                                }else{
+                                                    echo " Guest";
+                                                }
 
                                                 ?>
                                             </span><br />
@@ -174,7 +187,7 @@ if (strlen($count) >= 4) {
 
                                         <address>
                                             <span><strong>Order Date:</strong> <?php echo date('d/m/Y', $timestamp); ?></span><br />
-                                            <span><strong>Table:</strong> <?php echo $rtable; ?></span><br>
+                                            <span><strong>Table:</strong> <?php echo $tablename; ?></span><br>
                                             <span><strong>Waiter:</strong> <?php echo $waiter; ?></span><br />
                                             
                                             <?php

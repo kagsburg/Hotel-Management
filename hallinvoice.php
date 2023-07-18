@@ -84,6 +84,7 @@ if (mysqli_num_rows($delivery) === 0) {
                                 <div class="row">
                                     <?php
                                         $count = 1;
+                                        $totalvat =0;
         $reservation = mysqli_query($con, "SELECT * FROM $reservetable WHERE  hallreservation_id='$id'");
         $row =  mysqli_fetch_array($reservation);
         $hallreservation_id = $row['hallreservation_id'];
@@ -101,7 +102,7 @@ if (mysqli_num_rows($delivery) === 0) {
         $creator = $row['creator'];
         $timestamp = $row['timestamp'];
         $getyear = date('Y', $timestamp);
-        $vat = 10;
+        $vat = 18;
         $beforeorders =  mysqli_query($con, "SELECT * FROM hallreservations WHERE status=1  AND hallreservation_id<'$id'") or die(mysqli_error($con));
         while ($rowb = mysqli_fetch_array($beforeorders)) {
             $timestamp2 = $rowb['timestamp'];
@@ -128,37 +129,37 @@ if (mysqli_num_rows($delivery) === 0) {
         $purposes = mysqli_query($con, "SELECT * FROM conferencerooms WHERE conferenceroom_id='$room_id'");
         $rowc = mysqli_fetch_array($purposes);
         $room = $rowc['room'];
-        $price = $days * $charge;
+        $price = $people * $charge;
         $vatamount = (($price * 18) / 100);
         // $charge = $price;
-        // $totalvat += $vatamount;
+        $totalvat += $vatamount;
         ?>
                                     <div class="col-xs-2">
                                         <img src="img/sitelogo.<?php echo $logo; ?>" class="img img-responsive" width="100">
                                     </div>
-                                    <div class="col-sm-9 pull-right">
-                                        <h2 class="text-center mb-4"><strong> </strong></h2>
+                                    <div class="col-sm-9 pull-right" style="flex: 1">
+                                        <h2 class="text-center mb-4"><strong><?php echo $hotelname; ?></strong></h2>
                                         <div class="d-flex" style="justify-content: space-between;">
-                                            <span>NIF: 4000058109</span>
-                                            <span>Centre fiscal: DGC</span>
+                                            <span></span>
+                                            <span>Chato Beach Resort Company Limited</span>
                                         </div>
                                         <div class="d-flex" style="justify-content: space-between;">
-                                            <span>R.C:82336</span>
-                                            <span>Secteur d’activités: Hôtellerie</span>
+                                            <span></span>
+                                            <span>TIN: 136073761</span>
                                         </div>
                                         <div class="d-flex" style="justify-content: space-between;">
-                                            <span>BP: 5970 kinindo</span>
-                                            <span>Forme juridique: SURL</span>
+                                            <span></span>
+                                            <span>P.O Box 54 Chato, Geita</span>
                                         </div>
                                         <div class="d-flex" style="justify-content: space-between;">
-                                            <span>Tel: +257 61 15 55 55</span>
-                                            <span>Assujetti à la TVA: Oui</span>
+                                            <span></span>
+                                            <span>Tel: +255758301785</span>
                                         </div>
                                         <div class="d-flex" style="justify-content: space-between;">
-                                            <span>Commune Muha, Zone Kinindo</span>
+                                            <span></span>
                                         </div>
                                         <div class="d-flex" style="justify-content: space-between;">
-                                            <span>Av: Av, du large, Ndamukiza-kinindo</span>
+                                            <span></span>
                                         </div>
                                     </div>
                                 </div>
@@ -167,16 +168,16 @@ if (mysqli_num_rows($delivery) === 0) {
                                         <h4>Invoice No. <span class="text-navy"><?php echo $invoice_no; ?></span></h4>
                                         <address>
                                             <strong>
-                                                Le client <br>
-                                                Nom et prénom ou Raison Social:
+                                                Guest Name <br>
+                                                
                                             </strong>
                                             <?php echo $fullname; ?><br>
                                             <strong>Phone:</strong> <?php echo $phone; ?><br />
                                             <strong>Country: </strong><?php echo $country; ?><br />
-                                            <span><strong>NIF:</strong></span><br>
+                                            <!-- <span><strong>NIF:</strong></span><br> -->
                                             <span><strong>Salle:</strong> <?php echo $room; ?></span><br>
-                                            <span><strong>Assujetti à la TVA:</strong> Oui Non</span><br>
-                                            <span><strong>Doit pour ce qui suit:</strong></span><br>
+                                            <!-- <span><strong>Assujetti à la TVA:</strong> Oui Non</span><br>
+                                            <span><strong>Doit pour ce qui suit:</strong></span><br> -->
                                             <span><strong>Invoice Date : </strong> <?php echo date('d/m/Y', $timenow); ?></span><br />
                                         </address>
                                     </div>
@@ -193,7 +194,7 @@ if (mysqli_num_rows($delivery) === 0) {
                                             <tr>
                                                 <th>Item Type</th>
                                                 <th>Type Name</th>
-                                                <th>Days</th>
+                                                <th>Number of Days</th>
                                                 <th>Unit Charge</th>
                                                 <th>VAT</th>
                                                 <th>Sub Total</th>
@@ -203,11 +204,11 @@ if (mysqli_num_rows($delivery) === 0) {
                                             <tr>
                                                 <td><strong>Room</strong> </td>
                                                 <td><?php echo $room;  ?></td>
-                                                <td><?php echo $days; ?></td>
+                                                <td><?php echo $people; ?></td>
                                                 <td><?php echo number_format($charge); ?></td>
                                                 <td><?php echo number_format($vatamount); ?></td>
                                                 <td><?php
-                        $roomtotal = ($charge * $days) + $vatamount;
+                        $roomtotal = ($charge * $people) ;
         echo number_format($roomtotal); ?></td>
                                             </tr>
                                         </tbody>
@@ -256,6 +257,8 @@ if (mysqli_num_rows($delivery) === 0) {
                                 $buffetcharge = $days * $qty * $price;
                                 $vatamount = (($price * $vat) / 100) * $days * $qty;
                                 $buffetcharge += $vatamount;
+                                $totalvat += $vatamount;
+
                                 ?>
                                                     <td><?php echo $buffetname;  ?></td>
                                                     <td><?php echo  $qty;  ?></td>
@@ -305,8 +308,10 @@ if (mysqli_num_rows($delivery) === 0) {
                                 $servicename = stripslashes($roww['service']);
                                 $servicecharge = $price * $days * $quantity;
                                 $vatamount = (($price * $vat) / 100) * $days * $quantity;
-                                $servicecharge += $vatamount;
+                                // $servicecharge += $vatamount;
                                 $totalservices = $servicecharge + $totalservices;
+                                $totalvat += $vatamount;
+
                                 ?>
                                                     <tr>
                                                         <td><strong><?php echo $servicename;  ?></strong> </td>
@@ -343,14 +348,17 @@ if (mysqli_num_rows($delivery) === 0) {
                                 $service = $row['service'];
                                 $price = $row['price'];
                                 $vatamount = (($price * $vat) / 100);
-                                $scharge = $price + $vatamount;
+                                // $scharge = $price + $vatamount;
+                                $scharge = $price;
                                 $totalservices2 += $scharge;
+                                $totalvat += $vatamount;
+
                                 ?>
                                                     <tr>
                                                         <td><strong><?php echo $service;  ?></strong> </td>
                                                         <td><?php echo number_format($price); ?></td>
                                                         <td><?php echo number_format($vatamount); ?></td>
-                                                        <td><?php echo number_format($scharge); ?></td>
+                                                        <td><?php echo number_format($price); ?></td>
                                                     </tr>
                                                 <?php } ?>
                                             </tbody>
@@ -374,16 +382,14 @@ if (mysqli_num_rows($delivery) === 0) {
         $totalhallincome = $row['totalhallincome'];
         echo number_format($totalhallincome); ?></strong></td>
                                         </tr>
-                                        <tr>
+                                        <!-- <tr>
                                             <?php
-            $htva = $totalcharge - $vatamount; // - $reduction;
-        ?>
+                                                $htva = $totalcharge - $vatamount; // - $reduction;
+                                            ?>
                                             <td><strong>HTVA :</strong></td>
                                             <td style="text-align: right;"><?php echo number_format($htva); ?></td>
-                                        </tr>
+                                        </tr> -->
                                         <tr>
-                                            <?php
-                                            $totalvat = (($totalcharge * $vat)/110)?>
                                             <td><strong>VAT :</strong></td>
                                             <td style="text-align: right;"><?php echo number_format($totalvat/* $vatamount */); ?></td>
                                         </tr>

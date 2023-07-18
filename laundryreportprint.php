@@ -42,7 +42,7 @@ $end = strtotime($_GET['end'])
       <div class="wrapper wrapper-content p-xl">
          <div class="ibox-content p-xl">
             <div class="row">
-               <div class="col-xs-2"><img src="img/sitelogo.jpg" class="img img-responsive"></div>
+               <div class="col-xs-2"><img src="img/sitelogo.<?php echo $logo; ?>" class="img img-responsive"></div>
 
 
             </div>
@@ -61,7 +61,7 @@ $end = strtotime($_GET['end'])
                            <th>Items</th>
                            <th>Quantity</th>
                            <th>Price</th>
-                           <th>HTVA</th>
+                           <!-- <th>HTVA</th> -->
                            <th>VAT</th>
                            <th>Total Price</th>
                         </tr>
@@ -121,7 +121,7 @@ $end = strtotime($_GET['end'])
 
                            $totalcharge = $charge * $clothes;
 
-                           $vatamount = (($totalcharge * $vat) / 110);
+                           $vatamount = (($totalcharge * $vat) / 100);
 
                            $htva = $totalcharge - $vatamount;
                            $net = $htva + $vatamount;
@@ -143,7 +143,7 @@ $end = strtotime($_GET['end'])
                                  $fullname = $row['fullname'];
                                  echo $fullname; */ ?>
                               </td> -->
-                              <td><?php echo number_format($htva); ?></td>
+                              <!-- <td><?php echo number_format($htva); ?></td> -->
                               <td><?php echo number_format($vatamount); ?></td>
                               <td><?php echo number_format($totalcharge); ?></td>
                            </tr>

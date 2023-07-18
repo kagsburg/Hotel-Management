@@ -1,6 +1,6 @@
 <?php 
 include 'includes/conn.php';
-   if(($_SESSION['hotelsys']!=1)&&($_SESSION['sysrole']!='manager')){
+   if(($_SESSION['hotelsys']!=1)&&($_SESSION['sysrole']!='manager' && $_SESSION['sysrole']!='Restaurant Attendant' && $_SESSION['sysrole']!='Kitchen Exploitation Officer')){
 header('Location:login');
 }
 ?>

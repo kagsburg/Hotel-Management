@@ -176,6 +176,7 @@ if ((!isset($_SESSION['hotelsys'])) || ($_SESSION['hotelsyslevel'] != 1)) {
                                                     <option value="Small Stock Attendant">Small Stock Attendant</option>
                                                     <option value="Kitchen Exploitation Officer">Kitchen Exploitation Officer</option>
                                                     <option value="Marketing and Events">Marketing and Events</option>
+                                                    <option value="Housekeeping and Maintenance">Housekeeping and Maintenance</option>
                                                 </select>
 
                                             </div>

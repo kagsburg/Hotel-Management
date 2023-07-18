@@ -107,8 +107,8 @@ if (!isset($_SESSION['hotelsys'])) {
                                             <input type="text" class="form-control" name='package' placeholder="Enter Bouquet" required='required'>
                                         </div>
 
-                                        <div class="form-group"><label class="control-label">Number of Days</label>
-                                            <input type="number" class="form-control" name="days" placeholder="Enter Days " required='required'>
+                                        <div class="form-group"><label class="control-label">Number of People</label>
+                                            <input type="number" class="form-control" name="days" placeholder="Enter Number of People " required='required'>
                                         </div>
 
                                         <div class="form-group"><label class="control-label">Charge</label>
@@ -140,7 +140,7 @@ if (!isset($_SESSION['hotelsys'])) {
                                             <tr>
                                                 <th>Bouquet</th>
                                                 <th>Charge</th>
-                                                <th>Days</th>
+                                                <th>Number of People</th>
                                                 <th>&nbsp;</th>
 
                                             </tr>

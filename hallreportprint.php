@@ -42,7 +42,7 @@ $end = strtotime($_GET['end'])
         <div class="wrapper wrapper-content p-xl">
             <div class="ibox-content p-xl">
                 <div class="row">
-                    <div class="col-xs-2"><img src="assets/demo/pearllogo.png" class="img img-responsive"></div>
+                    <div class="col-xs-2"><img src="img/sitelogo.<?php echo $logo; ?>" class="img img-responsive"></div>
                 </div>
                 <h1 class="text-center">Conference Room Report between <?php echo date('d/m/Y H:i', $start); ?> and <?php echo date('d/m/Y H:i', $end); ?></h1>
 
@@ -79,10 +79,10 @@ $end = strtotime($_GET['end'])
                                     $country = $row['country'];
                                     $charge = $row['charge'];
                                     $creator = $row['creator'];
-                                    $vat = 10;
+                                    $vat = 18 ;
                                     $getdays = (($checkout - $checkin) / (24 * 3600)) + 1;
-                                    $vatamount = ($getdays * $charge * $vat) / 100;
-                                    $hallcost = ($charge * $getdays) + $vatamount;
+                                    $vatamount = ($people * $charge * $vat) / 100;
+                                    $hallcost = ($charge * $people);
                                     $totalcosts += $hallcost;
                                 ?>
                                     <tr>

@@ -127,12 +127,12 @@ $end = strtotime($en);
                                                             $country = $row['country'];
                                                             $charge = $row['charge'];
                                                             $creator = $row['creator'];
-                                                            $vat = 10;
+                                                            $vat = 18;
                                                             $getdays = (($checkout - $checkin) / (24 * 3600)) + 1;
                                                             // round up the days
                                                             $getdays = floor($getdays);
-                                                            $vatamount = ($getdays * $charge * $vat) / 100;
-                                                            $hallcost = ($charge * $getdays) + $vatamount;
+                                                            $vatamount = ($people * $charge * $vat) / 100;
+                                                            $hallcost = ($charge * $people);
                                                             // round up to 2 decimal places
                                                             // $hallcost = round($hallcost, 2);
                                                             $totalcosts += $hallcost;

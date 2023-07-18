@@ -166,7 +166,9 @@ $empid = $_SESSION['emp_id'];
                                             <tbody>
                                                 <?php
                                                 $total = 0;
-                                                foreach ($requisition['products'] as $product) { //loop though items and prepare html content
+                                                foreach ($requisition['products'] as $product) { 
+                                                    //loop though items and prepare html content
+                                                    $requisition_product_id=$product['requisition_product_id'];
                                                     //set variables to use them in HTML content below
                                                     $purchaseitem_id = $product["product_id"];
                                                     $price = $product["price"];
@@ -193,12 +195,39 @@ $empid = $_SESSION['emp_id'];
 
                                                         <td>
                                                             <?php if (($_SESSION['hotelsyslevel'] == 1)) { ?>
-                                                                <a data-toggle="modal" class="btn btn-success btn-xs" href="#modal-form<?php echo $purchaseitem_id ?>"><i class="fa fa-edit"></i> Edit</a>
+                                                                <a data-toggle="modal" class="btn btn-success btn-xs" href="#modal-form<?php echo $requisition_product_id ?>"><i class="fa fa-edit"></i> Edit</a>
                                                             <?php } ?>
                                                         </td>
 
 
                                                     </tr>
+                                                    <div id="modal-form<?php echo $requisition_product_id ?>" class="modal fade" aria-hidden="true">
+                                                        <div class="modal-dialog">
+                                                            <div class="modal-content">
+                                                                <div class="modal-body">
+                                                                    <div class="row">
+                                                                        <div class="col-sm-12">
+                                                                            <h3 class="m-t-none m-b">Edit <?php echo $product_name; ?></h3>
+                                                                            <form role="form" action="editrequisition.php?id=<?php echo $requisition_product_id; ?>" method="POST">
+                                                                                <div class="form-group">
+                                                                                    <label for="qty<?php echo $requisition_product_id ?>">Quantity</label>
+                                                                                    <input type="number" id="qty<?php echo $requisition_product_id ?>" name="quantity" class="form-control" required="required" value="<?php echo $quantity; ?>">
+                                                                                </div>
+                                                                                <div class="form-group">
+                                                                                    <label for="prc<?php echo $requisition_product_id ?>">Unit Price</label>
+                                                                                    <input type="number" step="0.01" name="unitprice" id="prc<?php echo $requisition_product_id ?>" class="form-control" required="required" value="<?php echo $price; ?>">
+                                                                                </div>
+                                                                                <div>
+                                                                                    <button class="btn btn-sm btn-primary pull-right m-t-n-xs" type="submit"><strong>Edit</strong></button>
+                                                                                </div>
+                                                                            </form>
+                                                                        </div>
+
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 <?php } ?>
 
                                             </tbody>
@@ -223,17 +252,17 @@ $empid = $_SESSION['emp_id'];
                     </div>
                 </div>
             </div>
-            <?php
-            $getitems =  mysqli_query($con, "SELECT * FROM purchaseditems WHERE requisition_id='$id'");
-            while ($product = mysqli_fetch_array($getitems)) {
-                //set variables to use them in HTML content below
-                $purchaseitem_id = $product["purchaseditem_id"];
-                $item_id = $product["item_id"];
-                $stock = mysqli_query($con, "SELECT * FROM stock_items WHERE stockitem_id='$item_id'");
-                $row3 =  mysqli_fetch_array($stock);
-                $stockitem2 = $row3['stock_item'];
-                $quantity = $product["quantity"];
-                $price = $product["price"];
+            <!-- <?php
+            // $getitems =  mysqli_query($con, "SELECT * FROM purchaseditems WHERE requisition_id='$id'");
+            // while ($product = mysqli_fetch_array($getitems)) {
+            //     //set variables to use them in HTML content below
+            //     $purchaseitem_id = $product["purchaseditem_id"];
+            //     $item_id = $product["item_id"];
+            //     $stock = mysqli_query($con, "SELECT * FROM stock_items WHERE stockitem_id='$item_id'");
+            //     $row3 =  mysqli_fetch_array($stock);
+            //     $stockitem2 = $row3['stock_item'];
+            //     $quantity = $product["quantity"];
+            //     $price = $product["price"];
             ?>
                 <div id="modal-form<?php echo $purchaseitem_id ?>" class="modal fade" aria-hidden="true">
                     <div class="modal-dialog">
@@ -262,7 +291,7 @@ $empid = $_SESSION['emp_id'];
                         </div>
                     </div>
                 </div>
-            <?php } ?>
+            <?php //} ?> -->
         </div>
     <?php } ?>
     <!-- Mainly scripts -->

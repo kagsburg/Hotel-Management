@@ -17,6 +17,11 @@ $creator = $row['creator'];
 $timestamp = $row['timestamp'];
 $getyear = date('Y', $timestamp);
 $count = 1;
+// get table name 
+$table = mysqli_query($con, "SELECT * FROM hoteltables WHERE hoteltable_id='$rtable' AND status='1'");
+$rowt = mysqli_fetch_array($table);
+$tablename = $rowt['table_no'];
+
 $beforeorders =  mysqli_query($con, "SELECT * FROM orders WHERE status IN (1,2)  AND  order_id<'$order_id'") or die(mysqli_error($con));
 while ($rowb = mysqli_fetch_array($beforeorders)) {
   $timestamp2 = $rowb['timestamp'];
@@ -186,7 +191,7 @@ if (strlen($count) >= 4) {
 
             <address>
               <span><strong>Order Date:</strong> <?php echo date('d/m/Y', $timestamp); ?></span><br />
-              <span><strong>Table:</strong> <?php echo $rtable; ?></span><br />
+              <span><strong>Table:</strong> <?php echo $tablename; ?></span><br />
               <span><strong>Waiter:</strong> <?php echo $waiter; ?></span><br />
 
               <?php
