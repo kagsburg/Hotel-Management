@@ -82,7 +82,7 @@ if (!isset($_SESSION['hotelsys'])) {
                                 </div>
                                 <div class="ibox-content">
                                     <?php
-                                    $checkedouts =  mysqli_query($con, "SELECT * FROM checkoutdetails WHERE totalbill>paidamount");
+                                    $checkedouts =  mysqli_query($con, "SELECT * FROM checkoutdetails WHERE paidamount < totalbill order by timestamp desc ");
                                     if (mysqli_num_rows($checkedouts) > 0) {
 
                                     ?>
