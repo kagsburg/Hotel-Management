@@ -65,8 +65,9 @@ if (!isset($_SESSION['hotelsys'])) {
                                 <div class="ibox-content">
                                     <?php
                                         $checkedouts =  mysqli_query($con, "SELECT * FROM checkoutdetails WHERE totalbill<=paidamount");
-        if (mysqli_num_rows($checkedouts) > 0) {
-            ?>
+                                        if (mysqli_num_rows($checkedouts) > 0) {
+                                            
+                                            ?>
                                         <table class="table table-striped table-bordered table-hover dataTables-example">
                                             <thead>
                                                 <tr>
@@ -74,10 +75,10 @@ if (!isset($_SESSION['hotelsys'])) {
                                                     <th>Room Number</th>
                                                     <th>Checked In</th>
                                                     <th>Checked Out</th>
-                                                    <th>USD Bill</th>
+                                                    <!-- <th>USD Bill</th> -->
                                                     <th>TSHS Bill</th>
                                                     <!-- <th>Total Bill</th> -->
-                                                    <th>USD Paid</th>
+                                                    <!-- <th>USD Paid</th> -->
                                                     <th>TSHS Paid</th>
                                                     <th>Checked out By</th>
                                                     <th>Action</th>
@@ -106,6 +107,11 @@ if (!isset($_SESSION['hotelsys'])) {
                             $status = $row['status'];
                             // $country = $row['country'];
                             $creator = $row['creator'];
+                            $getpayment= mysqli_query($con, "SELECT * FROM payments WHERE mode ='credit' and reservation_id ='$reserve_id' ORDER BY reservation_id DESC ")
+                            or die(mysqli_error($con));
+                            if (mysqli_num_rows($getpayment) > 0) {
+                               continue;
+                            } 
 
                             ?>
 
@@ -121,9 +127,9 @@ if (!isset($_SESSION['hotelsys'])) {
                                                         </td>
                                                         <td><?php echo date('d/m/Y', $checkin); ?></td>
                                                         <td><?php echo date('d/m/Y', $actualcheckout); ?></td>
+                                                        <!-- <td><?php echo number_format($totalbill); ?></td> -->
                                                         <td><?php echo number_format($totalbill); ?></td>
-                                                        <td><?php echo number_format($totalbill); ?></td>
-                                                        <td><?php echo number_format($paidamount); ?></td>
+                                                        <!-- <td><?php echo number_format($paidamount); ?></td> -->
                                                         <td><?php echo number_format($paidamount); ?></td>                      
                                                         <td>
                                                             <div class="tooltip-demo">

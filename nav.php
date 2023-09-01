@@ -354,7 +354,10 @@ if ((isset($_SESSION['lan'])) && ($_SESSION['lan'] == 'fr')) {
                                  <a href="cleared">Without Debt</a>
                               </li>
                               <li>
-                                 <a href="uncleared">With Debt</a>
+                                 <a href="unclearedcredit">With Credit</a>
+                              </li>
+                              <li>
+                                 <a href="uncleared">With Debt Cash</a>
                               </li>
                            </ul>
                         </li>
@@ -582,7 +585,10 @@ if ((isset($_SESSION['lan'])) && ($_SESSION['lan'] == 'fr')) {
                                  <a href="cleared">Without Debt</a>
                               </li>
                               <li>
-                                 <a href="uncleared">With Debt</a>
+                                 <a href="unclearedcredit">With Credit</a>
+                              </li>
+                              <li>
+                                 <a href="uncleared">With Debt Cash</a>
                               </li>
                            </ul>
                         </li>

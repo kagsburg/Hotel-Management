@@ -247,8 +247,11 @@ if ((isset($_SESSION['lan'])) && ($_SESSION['lan'] == 'fr')) {
                         <a href="cleared">Without Debt</a>
                     </li>
                     <li>
-                        <a href="uncleared">With Debt</a>
-                    </li>
+                                 <a href="unclearedcredit">With Credit</a>
+                              </li>
+                              <li>
+                                 <a href="uncleared">With Debt Cash</a>
+                              </li>
                 </ul>
             </li>
             <li><a href="pendingouts">Pending Check Outs</a></li>

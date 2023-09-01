@@ -11,7 +11,7 @@ if (!isset($_SESSION['hotelsys'])) {
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Guests Out with Debt | Hotel Manager</title>
+    <title>Guests Out with Credit | Hotel Manager</title>
 
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="font-awesome/css/font-awesome.css" rel="stylesheet">
@@ -57,7 +57,7 @@ if (!isset($_SESSION['hotelsys'])) {
                 <div class="row wrapper border-bottom white-bg page-heading">
 
                     <div class="col-lg-10">
-                        <h2>Hotel Guests checked out with Bill Debt</h2>
+                        <h2>Hotel Guests checked out with Bill on Credit</h2>
                         <ol class="breadcrumb">
                             <li> <a href="index"><i class="fa fa-home"></i> Home</a> </li>
 
@@ -77,12 +77,12 @@ if (!isset($_SESSION['hotelsys'])) {
                         <div class="col-lg-12">
                             <div class="ibox float-e-margins">
                                 <div class="ibox-title">
-                                    <h5>All Guests with bill Debt <small>Sort, search</small></h5>
+                                    <h5>All Guests with bill on Credit <small>Sort, search</small></h5>
 
                                 </div>
                                 <div class="ibox-content">
                                     <?php
-                                    $checkedouts =  mysqli_query($con, "SELECT * FROM checkoutdetails WHERE paidamount < totalbill order by timestamp desc ");  
+                                    $checkedouts =  mysqli_query($con, "SELECT * FROM checkoutdetails WHERE paidamount <= totalbill  order by timestamp desc ");  
                                     ?>
                                         <table class="table table-striped table-bordered table-hover dataTables-example">
                                             <thead>
@@ -121,10 +121,8 @@ if (!isset($_SESSION['hotelsys'])) {
                                                     // $country = $row['country'];
                                                     $creator = $row['creator'];
                                                     $getpayment= mysqli_query($con, "SELECT * FROM payments WHERE mode ='credit' and reservation_id ='$reserve_id' ORDER BY reservation_id DESC ")
-                                                        or die(mysqli_error($con));
-                                                        if (mysqli_num_rows($getpayment) > 0) {
-                                                        continue;
-                                                        } 
+                                                    or die(mysqli_error($con));
+                                                    if (mysqli_num_rows($getpayment) > 0) {                                                  
 
                                                 ?>
 
@@ -162,10 +160,10 @@ if (!isset($_SESSION['hotelsys'])) {
 
                                                     </tr>
                                                 <?php } ?>
-                                                <?php } else {
+                                                <?php } }else { 
                                                     ?>
-                                                    <div class="alert  alert-danger">Oops!! No Guests with uncleared bills Yet</div>
-                                                <?php } ?>
+                                                    <div class="alert  alert-danger">Oops!! No Guests with Credit bills Yet</div>
+                                                <?php }  ?>
                                             </tbody>
                                         </table>
                                 </div>
