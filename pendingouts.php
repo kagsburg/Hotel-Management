@@ -84,7 +84,8 @@ if (!isset($_SESSION['hotelsys'])) {
                                     <div class="col-xs-8 text-right">
                                         <span>Hotel Guest Outs Pending</span>
                                         <h2 class="font-bold"><?php
-                                                                $reservations = mysqli_query($con, "SELECT * FROM reservations WHERE checkout<'$timenow' AND status='1' ORDER BY reservation_id DESC");
+                                                                $date = strtotime(date('Y-m-d'));
+                                                                $reservations = mysqli_query($con, "SELECT * FROM reservations WHERE checkout<'$date' AND status='1' ORDER BY reservation_id DESC");
                                                                 echo mysqli_num_rows($reservations);
                                                                 ?></h2>
                                     </div>

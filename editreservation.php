@@ -97,10 +97,10 @@ $id = $_GET['id'];
                                     $arrivaltime = mysqli_real_escape_string($con, trim($_POST['arrivaltime']));
                                     $arrivingfrom = mysqli_real_escape_string($con, trim($_POST['arrivingfrom']));
                                     $departuretime = mysqli_real_escape_string($con, trim($_POST['departuretime']));
-                                    $currency = mysqli_real_escape_string($con, trim($_POST['currency']));
-                                    $fax = mysqli_real_escape_string($con, trim($_POST['fax']));
-                                    $reduction = mysqli_real_escape_string($con, trim($_POST['reduction']));
-                                    $business = mysqli_real_escape_string($con, trim($_POST['business']));
+                                    // $currency = mysqli_real_escape_string($con, trim($_POST['currency']));
+                                    // $fax = mysqli_real_escape_string($con, trim($_POST['fax']));
+                                    // $reduction = mysqli_real_escape_string($con, trim($_POST['reduction']));
+                                    // $business = mysqli_real_escape_string($con, trim($_POST['business']));
                                     $dob = mysqli_real_escape_string($con, trim($_POST['dob']));
                                     
                     
@@ -150,6 +150,10 @@ $id = $_GET['id'];
                                 $business1 = $row['business'];
                                 $reduction1 = $row['reduction'];
                                 $currency1 = $row['currency'];
+                                $companyname = $row['companyname'];
+                                $companyloc = $row['companyloc'];
+                                $companyphone = $row['companycont'];
+                                $companyemail = $row['companyemail'];
 
                                 $getnumber = mysqli_query($con, "SELECT * FROM rooms  WHERE room_id='$room_id1'");
                                 $row1 =  mysqli_fetch_array($getnumber);
@@ -224,16 +228,7 @@ $id = $_GET['id'];
                                             <label class="control-label">Currency</label>
                                             <select name="currency" class="form-control">
                                                 <option value="<?php echo $currency1; ?>"><?php echo $currency1; ?></option>
-                                                <?php if ($currency1 != "USD"): ?>
-                                                    <option value="USD">Dollars</option>
-                                                <?php endif; ?>
-                                                <?php
-                                                $getcurrencies = mysqli_query($con, "SELECT * FROM rates WHERE status='1'");
-                                                while ($row = mysqli_fetch_array($getcurrencies)) :
-                                                    $currency = $row["currency"];
-                                                ?>
-                                                    <option value="<?php echo $currency; ?>"><?php echo $currency; ?></option>
-                                                <?php endwhile; ?>
+                                               
                                             </select>
                                         </div>
                                     </div>
@@ -260,13 +255,13 @@ $id = $_GET['id'];
                                             <input type="email" name="email" class="form-control" value="<?php echo $email1; ?>" placeholder="Enter a valid email address">
                                             <div id='form_email_errorloc' class='text-danger'></div>
                                         </div>
-                                        <div class="form-group col-lg-6"><label class="control-label">FAX</label>
+                                        <!-- <div class="form-group col-lg-6"><label class="control-label">FAX</label>
                                             <input type="text" name="fax" class="form-control" placeholder="Enter Fax" value="<?php echo $fax1; ?>">
                                         </div>
                                         
                                         <div class="form-group  col-lg-6"><label class="control-label">Price Reduction</label>
                                             <input type="number" name="reduction" class="form-control" placeholder="Enter Price Reduction" value="<?php echo $reduction1; ?>">
-                                        </div>
+                                        </div> -->
 
                                     </div>
 
