@@ -79,8 +79,7 @@ $id = $_GET['id'];
                                     $_POST['number'],
                                     $_POST['room'],
                                     $_POST['checkin'],
-                                    $_POST['checkout'],
-                                )) {
+                                    $_POST['checkout'])){
                                     $fname = mysqli_real_escape_string($con, trim($_POST['firstname']));
                                     $lname = mysqli_real_escape_string($con, trim($_POST['lastname']));
                                     $phone = mysqli_real_escape_string($con, trim($_POST['number']));
@@ -100,10 +99,17 @@ $id = $_GET['id'];
                                     // $currency = mysqli_real_escape_string($con, trim($_POST['currency']));
                                     // $fax = mysqli_real_escape_string($con, trim($_POST['fax']));
                                     // $reduction = mysqli_real_escape_string($con, trim($_POST['reduction']));
-                                    // $business = mysqli_real_escape_string($con, trim($_POST['business']));
+                                    $business = mysqli_real_escape_string($con, trim($_POST['business']));
                                     $dob = mysqli_real_escape_string($con, trim($_POST['dob']));
+                                    $sponsor = isset($_POST['sponsor'])? mysqli_real_escape_string($con, trim($_POST['sponsor'])) : '';
+                   
+                                    if ($sponsor == 'linked') {
+                                    $companyname = mysqli_real_escape_string($con, trim($_POST['companyname']));
                                     
-                    
+                                    }else{
+                                    $companyname = '';
+                                    
+                                    }
                                     if ( (empty($_POST['firstname'])) || (empty($_POST['lastname'])) || (empty($_POST['number'])) || (!isset($_POST['adults'])) || (empty($_POST['room'])) || (empty($_POST['checkin'])) || (empty($_POST['checkout'])) ) {
                                         $errors[] = 'All Fields Marked with * should be filled';
                                     }
@@ -117,7 +123,10 @@ $id = $_GET['id'];
                                         <?php
                                         }
                                     } else {
-                                        mysqli_query($con, "UPDATE reservations SET firstname='$fname',lastname='$lname',phone='$phone',email='$email',origin='$origin',room='$room',id_number='$idnumber',occupation='$occupation',checkin='$checkin',checkout='$checkout',adults='$adults',kids='$kids',widebed='$widebed',arrivaltime='$arrivaltime',arrivingfrom='$arrivingfrom',departuretime='$departuretime', currency='$currency', fax='$fax', reduction='$reduction', business='$business', dob='$dob'  WHERE reservation_id='$id'") or die(mysqli_error($con));
+                                        mysqli_query($con, "UPDATE reservations SET firstname='$fname',lastname='$lname',phone='$phone',email='$email',origin='$origin',room='$room',id_number='$idnumber',occupation='$occupation',checkin='$checkin',
+                                        checkout='$checkout',adults='$adults',kids='$kids',widebed='$widebed',arrivaltime='$arrivaltime',arrivingfrom='$arrivingfrom',
+                                        departuretime='$departuretime', business='$business', dob='$dob' , companyname='$companyname'
+                                         WHERE reservation_id='$id'") or die(mysqli_error($con));
 
                                         ?>
                                         <div class="alert alert-success"><i class="fa fa-check"></i> Reservation Successfully Edited</div>
@@ -151,9 +160,6 @@ $id = $_GET['id'];
                                 $reduction1 = $row['reduction'];
                                 $currency1 = $row['currency'];
                                 $companyname = $row['companyname'];
-                                $companyloc = $row['companyloc'];
-                                $companyphone = $row['companycont'];
-                                $companyemail = $row['companyemail'];
 
                                 $getnumber = mysqli_query($con, "SELECT * FROM rooms  WHERE room_id='$room_id1'");
                                 $row1 =  mysqli_fetch_array($getnumber);
@@ -224,17 +230,26 @@ $id = $_GET['id'];
                                             <label class="control-label">Business</label>
                                             <input type="text" name="business" class="form-control" placeholder="Enter Business" value="<?php echo $business1; ?>">
                                         </div>
-                                        <div class="form-group  col-lg-6">
+                                        <!-- <div class="form-group  col-lg-6">
                                             <label class="control-label">Currency</label>
                                             <select name="currency" class="form-control">
                                                 <option value="<?php echo $currency1; ?>"><?php echo $currency1; ?></option>
-                                               
+                                                <?php if ($currency1 != "USD"): ?>
+                                                    <option value="USD">Dollars</option>
+                                                <?php endif; ?>
+                                                <?php
+                                                $getcurrencies = mysqli_query($con, "SELECT * FROM rates WHERE status='1'");
+                                                while ($row = mysqli_fetch_array($getcurrencies)) :
+                                                    $currency = $row["currency"];
+                                                ?>
+                                                    <option value="<?php echo $currency; ?>"><?php echo $currency; ?></option>
+                                                <?php endwhile; ?>
                                             </select>
-                                        </div>
+                                        </div> -->
                                     </div>
                                     <div class="row">
                                         <div class="form-group  col-lg-4"><label class="control-label">* Arrival Date</label>
-                                            <input type="text" name="checkin" class="form-control datepick" placeholder="Enter Date" value="<?php echo date('d/m/Y', $checkin1); ?>" required>
+                                            <input type="date" name="checkin" class="form-control " placeholder="Enter Date" value="<?php echo date('Y-m-d', $checkin1); ?>" required>
                                         </div>
                                         <div class="form-group  col-lg-4"><label class="control-label">Arrival Time</label>
                                             <input type="time" name="arrivaltime" class="form-control" placeholder="Enter Time" value="<?php echo $arrivaltime1; ?>">
@@ -243,7 +258,7 @@ $id = $_GET['id'];
                                             <input type="text" name="arrivingfrom" class="form-control" placeholder="Arriving From" value="<?php echo $arrivingfrom1 ?>">
                                         </div>
                                         <div class="form-group  col-lg-6"><label class="control-label">* Departure Date</label>
-                                            <input type="text" name="checkout" class="form-control datepick" placeholder="Enter Date" value="<?php echo date('d/m/Y', $checkout1); ?>" required>
+                                            <input type="date" name="checkout" class="form-control " placeholder="Enter Date" value="<?php echo date('Y-m-d', $checkout1); ?>" required>
                                         </div>
                                         <div class="form-group  col-lg-6"><label class="control-label">Departure Time</label>
                                             <input type="time" name="departuretime" class="form-control" placeholder="Enter Time" value="<?php echo $departuretime1; ?>">
@@ -255,6 +270,37 @@ $id = $_GET['id'];
                                             <input type="email" name="email" class="form-control" value="<?php echo $email1; ?>" placeholder="Enter a valid email address">
                                             <div id='form_email_errorloc' class='text-danger'></div>
                                         </div>
+                                        <div class="form-group col-lg-12">
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" name="sponsor" value="linked"
+                                                    <?php if($companyname != "") echo "checked"; ?>
+                                                     id="resident">
+                                                    <label class="form-check-label" for="resident">
+                                                        Is Customer Company Sponsored?
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="forcompany " 
+                                            <?php if($companyname != "") echo "style='display: block;'"; else echo "style='display: none;'"?>
+                                            >
+                                                <div class="form-group col-lg-12">
+                                                  <label class="control-label">* Company / Organisation Name</label>
+                                                <select data-placeholder="Choose Service.." name="companyname" id="company" class="chosen-select" style="width:100%;" tabindex="2">
+                                                    <?php
+                                                    $sponsors = mysqli_query($con, "SELECT * FROM sponsors WHERE status='1' ORDER BY company_name asc");
+                                                    while ($row =  mysqli_fetch_array($sponsors)) {
+                                                      $sponsor_id = $row['sponsor_id'];
+                                                      $name = $row['company_name'];
+                                                      $company_location = $row['company_location'];
+                                                      $company_email = $row['company_email'];
+                                                      $company_contact = $row['company_contact'];
+                                                    ?>
+                                                      <option value="<?php echo $sponsor_id; ?>" <?php if ($companyname == $sponsor_id) echo "selected";?>><?php echo $name; ?></option>
+                                                    <?php } ?>
+                                                  </select>
+                                                </div>
+                                               
+                                            </div>
                                         <!-- <div class="form-group col-lg-6"><label class="control-label">FAX</label>
                                             <input type="text" name="fax" class="form-control" placeholder="Enter Fax" value="<?php echo $fax1; ?>">
                                         </div>
@@ -322,6 +368,17 @@ $id = $_GET['id'];
         autoclose: true,
         format: "dd/mm/yyyy"
     });
+    $('#resident').on('click', function() {
+    var getselect = $(this).val();
+    if ($(this).is(':checked')) {
+      $('.forcompany').show();
+      // reinitialize the chosen box
+      $('#company_chosen').attr("style", "width:100%;");
+    }
+    else {
+      $('.forcompany').hide();
+    }
+  });
     $('#data_5 .input-daterange').datepicker({
         keyboardNavigation: false,
         forceParse: false,

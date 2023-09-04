@@ -96,14 +96,10 @@ if (!isset($_SESSION['hotelsys'])) {
                    
                     if ($sponsor == 'linked') {
                       $companyname = mysqli_real_escape_string($con, trim($_POST['companyname']));
-                      $companycont = mysqli_real_escape_string($con, trim($_POST['companycont']));
-                      $companyloc = mysqli_real_escape_string($con, trim($_POST['companyloc']));
-                      $companyemail = mysqli_real_escape_string($con, trim($_POST['companyemail']));
+                     
                     }else{
                       $companyname = '';
-                      $companycont = '';
-                      $companyloc = '';
-                      $companyemail = '';
+                      
                     }
                     if ((empty($fname)) || (empty($lname)) || (empty($phone)) || (empty($room)) || (empty($checkin))
                       || (empty($checkout))
@@ -152,10 +148,10 @@ if (!isset($_SESSION['hotelsys'])) {
                     } else {
                       mysqli_query($con, "INSERT INTO reservations(firstname,lastname,phone,email,origin,room,charge,adults,kids,widebed,dob,checkin,
                       arrivaltime,arrivingfrom,checkout,actualcheckout,departuretime,usdtariff,fax,id_number,occupation,business,reduction,creator,
-                      currency,advance,timestamp,status,companyname,companycont,companyloc,companyemail)  
+                      currency,advance,timestamp,status,companyname)  
                       VALUES('$fname','$lname','$phone','$email','$origin','$room_id','$charge','$adults','$kids','$widebed','$dob','$checkin',
                       '$arrivaltime','$arrivingfrom','$checkout','0','$departuretime','','$fax','$idnumber','$occupation','$business','$reduction','"
-                        . $_SESSION['emp_id'] . "','$currency','$advance',UNIX_TIMESTAMP(),'0','$companyname','$companycont','$companyloc','$companyemail')") or die(mysqli_error($con));
+                        . $_SESSION['emp_id'] . "','$currency','$advance',UNIX_TIMESTAMP(),'0','$companyname')") or die(mysqli_error($con));
                       $last_id = mysqli_insert_id($con);
                       if (!empty($advance)) {
                         mysqli_query($con, "INSERT INTO payments(reservation_id,amount,timestamp,status) VALUES('$last_id','$advance','$timenow',1)") or die(mysqli_error($con));
@@ -282,18 +278,23 @@ if (!isset($_SESSION['hotelsys'])) {
                                                 </div>
                                             </div>
                                             <div class="forcompany " style="display: none;">
-                                                <div class="form-group col-lg-12"><label class="control-label">* Company / Organisation Name</label>
-                                                  <input type="text" name="companyname" class="form-control" placeholder="Enter your Company  Name">
+                                                <div class="form-group col-lg-12">
+                                                  <label class="control-label">* Company / Organisation Name</label>
+                                                <select data-placeholder="Choose Service.." name="companyname" id="company" class="chosen-select" style="width:100%;" tabindex="2">
+                                                    <?php
+                                                    $sponsors = mysqli_query($con, "SELECT * FROM sponsors WHERE status='1' ORDER BY company_name asc");
+                                                    while ($row =  mysqli_fetch_array($sponsors)) {
+                                                      $sponsor_id = $row['sponsor_id'];
+                                                      $company_name = $row['company_name'];
+                                                      $company_location = $row['company_location'];
+                                                      $company_email = $row['company_email'];
+                                                      $company_contact = $row['company_contact'];
+                                                    ?>
+                                                      <option value="<?php echo $sponsor_id; ?>"><?php echo $company_name; ?></option>
+                                                    <?php } ?>
+                                                  </select>
                                                 </div>
-                                                <div class="form-group col-lg-6"><label class="control-label">* Company / Organisation Contact</label>
-                                                  <input type="text" name="companycont" class="form-control" placeholder="Enter your contact  Number">
-                                                </div>
-                                                <div class="form-group col-lg-6"><label class="control-label">* Company / Organisation Location</label>
-                                                  <input type="text" name="companyloc" class="form-control" placeholder="Enter your Location" >
-                                                </div>
-                                                <div class="form-group col-lg-11"><label class="control-label">Company / Organisation Email Address</label>
-                                                  <input type="email" name="companyemail" class="form-control" placeholder="Enter your Email  Address">
-                                                </div>
+                                               
                                             </div>
                       
                     <div class="form-group" style="margin-left: 30px;">
@@ -416,6 +417,8 @@ if (!isset($_SESSION['hotelsys'])) {
     var getselect = $(this).val();
     if ($(this).is(':checked')) {
       $('.forcompany').show();
+      // reinitialize the chosen box
+      $('#company_chosen').attr("style", "width:100%;");
     }
     else {
       $('.forcompany').hide();

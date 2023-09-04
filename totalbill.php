@@ -131,6 +131,7 @@ if (isset($_POST['bill'])) {
                                        $firstname1 = $row['firstname'];
                                        $lastname1 = $row['lastname'];
                                        $room = $row['room'];
+                                       $companyname = $row['companyname'];
                                        $getnumber = mysqli_query($con, "SELECT * FROM rooms  WHERE room_id='$room'");
                                        $row1 =  mysqli_fetch_array($getnumber);
                                        $roomnumber = $row1['roomnumber'];
@@ -142,6 +143,15 @@ if (isset($_POST['bill'])) {
                                         <span><strong>Room No:</strong> <?php echo $roomnumber; ?></span><br>
                                         <!--<span><strong>Assujetti à la TVA:</strong> Oui Non</span><br>-->
                                         <!--<span><strong>Doit pour ce qui suit:</strong></span><br>-->
+                                        <?php if ($companyname!='') { 
+                                            $getcompany = mysqli_query($con, "SELECT * FROM sponsors WHERE sponsor_id='$companyname' and status='1'")or die(mysqli_error($con));
+                                            $row = mysqli_fetch_array($getcompany);
+                                            $company_name = $row['company_name'];
+                                            $company_contact = $row['company_contact'];
+                                            ?>
+                                            <span><strong>Sponsor Name:</strong> <?php echo $company_name; ?></span><br>
+                                            <span><strong>Sponsor Contact:</strong> <?php echo $company_contact; ?></span><br>
+                                        <?php } ?>
                                         <address>
                                             <span><strong>Date:</strong> <?php echo date('d/m/Y', $timenow); ?></span><br />
                                         </address>

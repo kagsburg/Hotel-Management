@@ -64,7 +64,7 @@ if (!isset($_SESSION['hotelsys'])) {
                                 </div>
                                 <div class="ibox-content">
                                     <?php
-                                        $checkedouts =  mysqli_query($con, "SELECT * FROM checkoutdetails WHERE totalbill<=paidamount");
+                                        $checkedouts =  mysqli_query($con, "SELECT * FROM checkoutdetails WHERE totalbill<=paidamount group by reserve_id ORDER BY checkoutdetails_id DESC");
                                         if (mysqli_num_rows($checkedouts) > 0) {
                                             
                                             ?>
@@ -75,14 +75,9 @@ if (!isset($_SESSION['hotelsys'])) {
                                                     <th>Room Number</th>
                                                     <th>Checked In</th>
                                                     <th>Checked Out</th>
-                                                    <!-- <th>USD Bill</th> -->
-                                                    <th>TSHS Bill</th>
-                                                    <!-- <th>Total Bill</th> -->
-                                                    <!-- <th>USD Paid</th> -->
-                                                    <th>TSHS Paid</th>
+                                                    <th>Total Bill</th>
                                                     <th>Checked out By</th>
                                                     <th>Action</th>
-                                                    <!--<th>Action</th>-->
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -112,6 +107,9 @@ if (!isset($_SESSION['hotelsys'])) {
                             if (mysqli_num_rows($getpayment) > 0) {
                                continue;
                             } 
+                            $getpayments = mysqli_query($con, "SELECT SUM(amount) AS totalpaid FROM payments WHERE reservation_id='$reserve_id'");
+                            $payrow = mysqli_fetch_array($getpayments);
+                            $totalpaid = $payrow['totalpaid'];
 
                             ?>
 
@@ -127,20 +125,18 @@ if (!isset($_SESSION['hotelsys'])) {
                                                         </td>
                                                         <td><?php echo date('d/m/Y', $checkin); ?></td>
                                                         <td><?php echo date('d/m/Y', $actualcheckout); ?></td>
-                                                        <!-- <td><?php echo number_format($totalbill); ?></td> -->
                                                         <td><?php echo number_format($totalbill); ?></td>
-                                                        <!-- <td><?php echo number_format($paidamount); ?></td> -->
-                                                        <td><?php echo number_format($paidamount); ?></td>                      
+                                                        <!-- <td><?php echo number_format($totalpaid); ?></td>                   -->
                                                         <td>
                                                             <div class="tooltip-demo">
 
                                                                 <a href="employee?id=<?php echo $creator; ?>" data-original-title="View admin profile" data-toggle="tooltip" data-placement="bottom" title="">
                                                                     <?php
-                                    $employee =  mysqli_query($con, "SELECT * FROM employees WHERE employee_id='$creator'");
-                            $row = mysqli_fetch_array($employee);
-                            $employee_id = $row['employee_id'];
-                            $fullname = $row['fullname'];
-                            echo $fullname; ?></a>
+                                                                    $employee =  mysqli_query($con, "SELECT * FROM employees WHERE employee_id='$creator'");
+                                                                    $row = mysqli_fetch_array($employee);
+                                                                    $employee_id = $row['employee_id'];
+                                                                    $fullname = $row['fullname'];
+                                                                    echo $fullname; ?></a>
                                                             </div>
                                                         </td>
                                                         <td><a href="reservation?id=<?php echo $reservation_id; ?>" class="btn btn-xs btn-info">Guest Details</a>

@@ -106,6 +106,7 @@ $id = $_GET['id'];
         $occupation = $row['occupation'];
         $business = $row['business'];
         $reduction = $row['reduction'];
+        $companyname = $row['companyname'];
 
 
         ?>
@@ -148,6 +149,17 @@ $id = $_GET['id'];
                                                     <strong>Email</strong>. : <?php echo $email; ?> <br>
                                                 </div>
                                             </div>
+                                            <?php if ($companyname != ''){
+                                                $getcompany = mysqli_query($con, "SELECT * FROM sponsors WHERE sponsor_id='$companyname' and status='1'")or die(mysqli_error($con));
+                                                $row = mysqli_fetch_array($getcompany);
+                                                $company_name = $row['company_name'];
+                                                ?>
+                                                <div class="feed-element">
+                                                <div class="media-body ">
+                                                    <strong>Sponsor</strong>. : <?php echo $company_name; ?> <br>
+                                                </div>
+                                            </div>
+                                            <?php } ?>
 
                                             <div class="feed-element">
                                                 <div class="media-body ">

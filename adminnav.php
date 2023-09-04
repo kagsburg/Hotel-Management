@@ -337,6 +337,9 @@ if ((isset($_SESSION['lan'])) && ($_SESSION['lan'] == 'fr')) {
         </ul>
     </li>
     <li>
+        <a href= "sponsor"><i class="fa fa-building-o"></i><span class="nav-label"> Organisations</span></a>
+    </li>
+    <li>
         <a href=""><i class="fa fa-female"></i> <span class="nav-label">Laundry</span> <span class="fa arrow"></span></a>
         <ul class="nav nav-second-level">
             <li><a href="laundrytypes">Laundry Packages</a></li>
