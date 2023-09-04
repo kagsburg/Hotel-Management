@@ -84,6 +84,7 @@ $id = $_GET['id'];
        $status = $row['status'];
        $creator = $row['creator'];
        $reduction = $row['reduction'];
+       $companyname=$row['companyname'];
        // $paidby = $row['paidby'];
        // $nationality = $row['nationality'];
        //  $orgcontact=$row['orgcontact'];
@@ -294,6 +295,19 @@ $id = $_GET['id'];
                                  <label>Payment Mode</label>
                                  <select name="mode" class="form-control mode">
                                     <option value="" selected="selected">Select Mode</option>
+                                    <?php if ($companyname != ""){ 
+                                          $getcompany = mysqli_query($con, "SELECT * FROM sponsors WHERE sponsor_id='$companyname'");
+                                          $row23 = mysqli_fetch_array($getcompany);
+                                          $company_name = $row23['company_name'];
+                                       ?>
+                                    <option value="Cash">Cash - <?php echo $company_name; ?></option>
+                                    <option value="Credit">Credit - <?php echo $company_name; ?></option>
+                                    <option value="Cheque">Cheque - <?php echo $company_name; ?></option>
+                                    <option value="Cheque">Cheque - <?php echo $company_name; ?></option>
+                                    <option value="Visa Card">Visa Card - <?php echo $company_name; ?></option>
+                                    <option value="Bank">Bank - <?php echo $company_name; ?></option>
+                                    <option value="mobile money">Mobile Money - <?php echo $company_name; ?></option>
+                                    <?php }else{ ?>
                                     <option value="Bonus">Bonus</option>
                                     <option value="Cash">Cash</option>  
                                     <option value="Credit">Credit</option>
@@ -301,6 +315,7 @@ $id = $_GET['id'];
                                     <option value="Visa Card">Visa Card</option>
                                     <option value="Bank">Bank</option>
                                     <option value="mobile money">Mobile Money</option>
+                                    <?php } ?>
                                  </select>
                               </div>
                               <div class="form-group" id="data_1">
