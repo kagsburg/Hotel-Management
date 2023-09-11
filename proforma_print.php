@@ -140,6 +140,7 @@ $companyname = $row['companyname'];
                 </div>
                 <?php
                 $vat=0.18;
+                $grandtotal = 0;
                 $reservations = mysqli_query($con, "SELECT * FROM reservations WHERE reservation_id='$id'");
                 $row =  mysqli_fetch_array($reservations);
                 $reservation_id = $row['reservation_id'];
@@ -245,6 +246,7 @@ $companyname = $row['companyname'];
                             $totalcharge = $dollarCharge * $nights;
                             $totalcharge -= $reduction;
                             // $totalcharge = getForexConvertedAmount($currencyrate, $totalcharge);
+                            $grandtotal+=$totalcharge;
                         } ?>
                         <tr>
                             <td><strong>TOTAL :</strong></td>
@@ -302,6 +304,7 @@ $companyname = $row['companyname'];
                                     $timestamp = $row3['timestamp'];
                                     $subtotal = $price - $reduction;
                                     $totalotherservices = $totalotherservices + $subtotal;
+                                    $grandtotal += $totalotherservices;
                                 ?>
                                     <tr>
                                         <td><?php echo date('d/m/Y', $timestamp); ?></td>
@@ -399,7 +402,7 @@ $companyname = $row['companyname'];
                                     $totalcharges = mysqli_query($con, "SELECT COALESCE(SUM(foodprice*quantity), 0) AS totalcosts FROM restaurantorders WHERE order_id='$order_id'");
                                     $row =  mysqli_fetch_array($totalcharges);
                                     $totalrestcosts = $row['totalcosts'];
-                                    $restbill = $totalrestcosts + $restbill;
+                                    $restbill = $totalrestcosts + $restbill; $grandtotal += $restbill;
                                     ?>
                                     <td><strong>TOTAL :</strong></td>
                                     <td><strong><?php echo number_format($restbill); ?> TSHS</strong></td>
@@ -444,6 +447,7 @@ $companyname = $row['companyname'];
                         }
                         $totalvat = ((($totallaundry ) * $vat));
                         $net =  $totallaundry;
+                        $grandtotal += $totallaundry;
                     ?>
                         <div class="table-responsive m-t">
                             <h3><i>Laundry Work on <?php echo date('d/m/Y', $timestamp); ?></i></h3>
@@ -492,7 +496,7 @@ $companyname = $row['companyname'];
                 <table class="table table-responsive table-bordered">
                     <thead>
                         <tr class="table-primary">
-                            <th>TOTAL BILL</th>
+                            <th>GRAND TOTAL BILL</th>
                             <th style="text-align: right"><?php echo number_format($totallaundry + $restbill + $totalcharge + $totalotherservices) . " " . $currency; ?></th>
                         </tr>
                     </thead>

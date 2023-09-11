@@ -96,6 +96,7 @@ if (mysqli_num_rows($delivery) === 0) {
                                 $count = 1;
                                 $totalvat = 0;
                                 $vat = 18;
+                                $grandtotal = 0;
                                 $reservation = mysqli_query($con, "SELECT * FROM $reservetable WHERE  hallreservation_id='$id'");
                                 $row =  mysqli_fetch_array($reservation);
                                 $hallreservation_id = $row['hallreservation_id'];

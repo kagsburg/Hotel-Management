@@ -126,6 +126,7 @@ if (isset($_POST['bill'])) {
                                                 Full Names:
                                             </strong>
                                        <?php
+                                       $grandtotal = 0;
                                        $reservation = mysqli_query($con, "SELECT * FROM reservations WHERE reservation_id='$id'");
                                        $row =  mysqli_fetch_array($reservation);
                                        $firstname1 = $row['firstname'];
@@ -283,6 +284,7 @@ if (isset($_POST['bill'])) {
                                           <td><strong>TOTAL :</strong></td>
                                           <td><strong><?php
                                                      $total= $totalcharge + $vatamount;
+                                                     $grandtotal+= $total;
                                                       echo number_format($total) . ' ' . $currency; ?></strong></td>
                                        </tr>
                                         <tr>
@@ -346,6 +348,7 @@ if (isset($_POST['bill'])) {
                                           <tr>
                                              <td><strong>TOTAL :</strong></td>
                                              <td><strong><?php
+                                                         $grandtotal += $totalotherservices;
                                                          echo number_format($totalotherservices); ?> TSHS</strong></td>
                                           </tr>
                                        </tbody>
@@ -432,8 +435,9 @@ if (isset($_POST['bill'])) {
                                                 <?php
                                                 $totalcharges = mysqli_query($con, "SELECT COALESCE(SUM(foodprice*quantity), 0) AS totalcosts FROM restaurantorders WHERE order_id='$order_id'");
                                                 $row =  mysqli_fetch_array($totalcharges);
-                                                $totalrestcosts = getForexConvertedAmount(1, $row['totalcosts']);
+                                                $totalrestcosts =$row['totalcosts'];// getForexConvertedAmount(1, $row['totalcosts']);
                                                 $restbill = $totalrestcosts + $restbill;
+                                                $grandtotal += $restbill;
                                                 ?>
                                                 <td><strong>TOTAL :</strong></td>
                                                 <td><strong><?php echo number_format($totalrestcosts); ?> TSHS</strong></td>
@@ -523,7 +527,9 @@ if (isset($_POST['bill'])) {
                                        <tbody>
                                           <tr>
                                              <td><strong>TOTAL :</strong></td>
-                                             <td><strong><?php echo number_format($totallaundry); ?> TSHS</strong></td>
+                                             <td><strong><?php 
+                                             $grandtotal += $totallaundry;
+                                             echo number_format($totallaundry); ?> TSHS</strong></td>
                                           </tr>
                                        </tbody>
                                     </table>
@@ -594,13 +600,25 @@ if (isset($_POST['bill'])) {
                                        <tbody>
                                           <tr>
                                              <td><strong>TOTAL :</strong></td>
-                                             <td><strong><?php echo number_format($totalgym); ?> TSHS</strong></td>
+                                             <td><strong><?php 
+                                             $grandtotal += $totalgym;
+                                             echo number_format($totalgym); ?> TSHS</strong></td>
                                           </tr>
                                        </tbody>
                                     </table>
 
                               <?php }
                               } ?>
+                              <table class="table table-responsive table-bordered">
+                                    <thead>
+                                        <tr class="table-primary">
+                                            <th>GRAND TOTAL BILL</th>
+                                            <?php        ?>
+                                            <th style="text-align: right">
+                                            <?php echo number_format($grandtotal) . " TSHS";?></th>
+                                        </tr>
+                                    </thead>
+                                </table>
 
                               <div class="well m-t text-center">
                                  <h3 style="font-style: italic">Thank you for Spending time at Our Hotel</h3>

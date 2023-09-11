@@ -120,6 +120,7 @@ function getForexConvertedAmount($rate, $amount)
 
             </div>
             <?php
+            $grandtotal=0;
             $reservations = mysqli_query($con, "SELECT * FROM reservations WHERE reservation_id='$id'");
             $row =  mysqli_fetch_array($reservations);
             $reservation_id = $row['reservation_id'];
@@ -235,6 +236,7 @@ function getForexConvertedAmount($rate, $amount)
                         <td><strong>TOTAL :</strong></td>
                         <td><strong><?php
                                  $total= $totalcharge + $vatamount;
+                           $grandtotal+= $total;
                                  echo number_format($total) . ' ' . $currency; ?></strong></td>
                      </tr>
                      <tr>
@@ -298,6 +300,7 @@ function getForexConvertedAmount($rate, $amount)
                         <tr>
                            <td><strong>TOTAL :</strong></td>
                            <td><strong><?php
+                                       $grandtotal+= $totalotherservices;
                                        echo number_format($totalotherservices); ?> TSHS</strong></td>
                         </tr>
                      </tbody>
@@ -388,7 +391,9 @@ function getForexConvertedAmount($rate, $amount)
                               $restbill = $totalrestcosts + $restbill;
                               ?>
                               <td><strong>TOTAL :</strong></td>
-                              <td><strong><?php echo number_format($totalrestcosts); ?> TSHS</strong></td>
+                              <td><strong><?php echo 
+                           $grandtotal+= $totalrestcosts;
+                              number_format($totalrestcosts); ?> TSHS</strong></td>
                            </tr>
                         </tbody>
                      </table>
@@ -473,7 +478,9 @@ function getForexConvertedAmount($rate, $amount)
                      <tbody>
                         <tr>
                            <td><strong>TOTAL :</strong></td>
-                           <td><strong><?php echo number_format($totallaundry); ?> TSHS</strong></td>
+                           <td><strong><?php 
+                           $grandtotal+= $totallaundry;
+                           echo number_format($totallaundry); ?> TSHS</strong></td>
                         </tr>
                      </tbody>
                   </table>
@@ -544,7 +551,9 @@ function getForexConvertedAmount($rate, $amount)
                      <tbody>
                         <tr>
                            <td><strong>TOTAL :</strong></td>
-                           <td><strong><?php echo number_format($totalgym); ?> TSHS</strong></td>
+                           <td><strong><?php 
+                           $grandtotal+= $totalgym;
+                           echo number_format($totalgym); ?> TSHS</strong></td>
                         </tr>
                      </tbody>
                   </table>
@@ -553,6 +562,16 @@ function getForexConvertedAmount($rate, $amount)
             }
 
             ?>
+             <table class="table table-responsive table-bordered">
+                                    <thead>
+                                        <tr class="table-primary">
+                                            <th>GRAND TOTAL BILL</th>
+                                            <?php        ?>
+                                            <th style="text-align: right">
+                                            <?php echo number_format($grandtotal) . " TSHS";?></th>
+                                        </tr>
+                                    </thead>
+                                </table>
 
 
             <div class="d-flex">

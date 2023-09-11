@@ -157,6 +157,7 @@ $companyname = $row['companyname'];
                                 </div>
                                 <?php
                                 $vat = 0.18;
+                                $grandtotal = 0;
         $reservations = mysqli_query($con, "SELECT * FROM reservations WHERE reservation_id='$id'");
         $row =  mysqli_fetch_array($reservations);
         $reservation_id = $row['reservation_id'];
@@ -235,6 +236,7 @@ $companyname = $row['companyname'];
         echo $roomtype;
         //if advance is null 
         // $advance = empty($advance) ? 0 : $advance;
+        $grandtotal+=$net;
         $getpayments = mysqli_query($con, "SELECT SUM(amount) AS totalpaid FROM payments WHERE reservation_id='$id' and status='1'");
         $payrow = mysqli_fetch_array($getpayments);
         $paidamount = $payrow['totalpaid'];
@@ -362,6 +364,7 @@ $companyname = $row['companyname'];
                                 $timestamp = $row3['timestamp'];
                                 $subtotal = $price - $reduction;
                                 $totalotherservices = $totalotherservices + $subtotal;
+                                $grandtotal+=$totalotherservices;
                                 ?>
                                                     <tr>
                                                         <td><?php echo date('d/m/Y', $timestamp); ?></td>
@@ -457,6 +460,7 @@ $companyname = $row['companyname'];
                     $row =  mysqli_fetch_array($totalcharges);
                     $totalrestcosts =  $row['totalcosts'];
                     $restbill = $totalrestcosts + $restbill;
+                    $grandtotal+=$restbill;
                     ?>
                                                     <td><strong>TOTAL :</strong></td>
                                                     <td><strong><?php echo number_format($restbill); ?> TSHS</strong></td>
@@ -549,6 +553,17 @@ $companyname = $row['companyname'];
                                             <?php        ?>
                                             <th style="text-align: right">
                                             <?php echo number_format(/* $totallaundry +  $net +  */$restbill +$totalotherservices) . " TSHS"; ?></th>
+                                        </tr>
+                                    </thead>
+                                </table>
+
+                                <table class="table table-responsive table-bordered">
+                                    <thead>
+                                        <tr class="table-primary">
+                                            <th>GRAND TOTAL BILL</th>
+                                            <?php        ?>
+                                            <th style="text-align: right">
+                                            <?php echo number_format($grandtotal) . " TSHS";?></th>
                                         </tr>
                                     </thead>
                                 </table>
