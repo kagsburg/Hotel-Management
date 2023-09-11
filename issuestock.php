@@ -106,8 +106,10 @@ if (($_SESSION['hotelsyslevel'] != 1) && ($_SESSION['sysrole'] != 'Store Attenda
                                                     if ($department == "-2") {
                                                         mysqli_query($con, "INSERT INTO kitchenstockitems(item_id,quantity,addedstock_id,status) VALUES('$item_id','$quantity[$i]','$last_id',1)");
                                                     }
-                                                    mysqli_query($con, "INSERT INTO issueditems(item_id,quantity,issuedstock_id,status) VALUES('$item_id','$quantity[$i]','$last_id',1)") or die(mysqli_error($con));
-                                                    mysqli_query($con, "INSERT INTO stockevents(item_id,activity,timestamp,status) VALUES('$item_id','$activity','$date','1')") or die(mysqli_error($con));
+                                                    mysqli_query($con, "INSERT INTO issueditems(item_id,quantity,issuedstock_id,status) 
+                                                    VALUES('$item_id','$quantity[$i]','$last_id',1)") or die(mysqli_error($con));
+                                                    mysqli_query($con, "INSERT INTO stockevents(item_id,activity,timestamp,status) 
+                                                    VALUES('$item_id','$activity','$date','1')") or die(mysqli_error($con));
                                                 }
                                             }
                                     ?>
