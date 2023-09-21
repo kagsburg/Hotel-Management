@@ -755,7 +755,7 @@ if ((isset($_SESSION['lan'])) && ($_SESSION['lan'] == 'fr')) {
                         <li><a href="addstockitem">Add Stock Item</a></li>
                         <li><a href="issuedstock">Issued Stock</a></li>
                         <li><a href="addstock">Add Stock</a></li>
-                        <li><a href="issuestock">Issue Stock</a></li>
+                        <!-- <li><a href="issuestock">Issue Stock</a></li> -->
                         <li><a href="#">Purchase Lists<span class="fa arrow"></span></a>
                            <ul class="nav nav-third-level">
                               <li>

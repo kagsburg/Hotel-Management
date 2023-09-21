@@ -102,11 +102,16 @@ if (!isset($_SESSION['hotelsys'])) {
                                                     $designation = $user['designation'];
                                                     // get department details
                                                     $department = mysqli_fetch_array(mysqli_query($con, "SELECT * FROM designations WHERE designation_id = $designation"));
+                                                    $department = $department['department_id'];
+                                                    // get department name
+                                                    $department = mysqli_fetch_array(mysqli_query($con, "SELECT * FROM departments WHERE department_id = $department"));
+                                                    $department = $department['department'];
                                                 ?>
 
                                                     <tr class="gradeA">
                                                         <td><?php echo str_pad($requisition_id, 4, "0", STR_PAD_LEFT); ?></td>
                                                         <td><?php echo  $timestamp; ?></td>
+                                                        <td><?php echo $department; ?></td>
                                                         <td> <?php echo $status; ?></td>
                                                         <td>
                                                             <a href="requisition?id=<?php echo $requisition_id; ?>" class="btn btn-primary btn-xs"><i class="fa fa-edit"></i>Details</a>

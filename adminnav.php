@@ -415,7 +415,7 @@ if ((isset($_SESSION['lan'])) && ($_SESSION['lan'] == 'fr')) {
             </li>
             <!-- <li><a href="addkitchenstock">Add Kitchen Stock</a></li> -->
             <!-- <li><a href="addstock">Add Stock</a></li> -->
-            <li><a href="issuestock">Issue Stock</a></li>
+            <!-- <li><a href="issuestock">Issue Stock</a></li> -->
             <li><a href="measurements">Item Measurements</a></li>
             <li><a href="categories">Item Categories</a></li>
            
