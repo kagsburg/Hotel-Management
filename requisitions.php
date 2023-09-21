@@ -85,6 +85,7 @@ if (!isset($_SESSION['hotelsys'])) {
                                                 <tr>
                                                     <th>Requisition id</th>
                                                     <th>Created On</th>
+                                                    <th>Department</th>
                                                     <th>Status</th>
                                                     <th>Action</th>
                                                 </tr>
@@ -95,7 +96,12 @@ if (!isset($_SESSION['hotelsys'])) {
                                                     $requisition_id = $row['requisition_id'];
                                                     $status = $row['status'] == '1' ? 'Approved' : 'Pending';
                                                     $timestamp = $row['requisition_date'];
-
+                                                    $user_id = $row['user_id'];
+                                                    // get user details
+                                                    $user = mysqli_fetch_array(mysqli_query($con, "SELECT * FROM employees WHERE employee_id = $user_id"));
+                                                    $designation = $user['designation'];
+                                                    // get department details
+                                                    $department = mysqli_fetch_array(mysqli_query($con, "SELECT * FROM designations WHERE designation_id = $designation"));
                                                 ?>
 
                                                     <tr class="gradeA">
