@@ -158,7 +158,11 @@ if (!isset($_SESSION['hotelsys'])) {
     <!-- Page-Level Scripts -->
     <script>
         $(document).ready(function() {
-            $('.dataTables-example').dataTable();
+            $('.dataTables-example').dataTable({
+                "order": [
+                    [0, "desc"]
+                ]
+            });
 
             /* Init DataTables */
             var oTable = $('#editable').dataTable();
