@@ -788,6 +788,8 @@ if ((isset($_SESSION['lan'])) && ($_SESSION['lan'] == 'fr')) {
                         <li><a href="addrequisition">Add Requisition</a></li>
                      </ul>
                   </li>
+                  <li><a href="orders"><i class="fa fa-bookmark"></i>Orders</a></li>
+
                   <li><a href="issuedstock"><i class="fa fa-suitcase"></i>Issued Stock</a></li>
                   <li>
                      <a href=""><i class="fa fa-bar-chart-o"></i> <span class="nav-label">Reports</span> <span class="fa arrow"></span></a>

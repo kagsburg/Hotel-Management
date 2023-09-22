@@ -22,8 +22,8 @@ if ((!isset($_SESSION['hotelsys']))) {
    $department = $designation['department_id'];
    
    // issue the stock item to the department
-   $stmt = $pdo->prepare("INSERT INTO issuedstock(date,admin_id,department_id,status) VALUES(UNIX_TIMESTAMP(),?,?,1)");
-   $stmt->execute([$_SESSION['hotelsys'], $department]);
+   $stmt = $pdo->prepare("INSERT INTO issuedstock(date,admin_id,department_id,requisition_id,status) VALUES(UNIX_TIMESTAMP(),?,?,?,1)");
+   $stmt->execute([$_SESSION['hotelsys'],$id, $department]);
    $last_id = $pdo->lastInsertId();
    $allproducts = $requisition['products'];
    $activity = 'Issued Requsition Request to ' . $employee['fullname'];

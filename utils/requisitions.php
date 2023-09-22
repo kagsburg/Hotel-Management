@@ -71,6 +71,18 @@ function approve_requisition(PDO $conn, $id)
     $stmt->execute([$id]);
     return $stmt->rowCount() > 0;
 }
+function confirm_requisition (PDO $conn, $id,$confirm)
+{
+    $stmt = $conn->prepare("UPDATE requisitions SET status=2,confirmed_by=? WHERE requisition_id=?");
+    $stmt->execute([$confirm,$id]);
+    return $stmt->rowCount() > 0;
+}
+function confirm_issued_stock(PDO $conn, $id)
+{
+    $stmt = $conn->prepare("UPDATE issuedstock SET status=2 WHERE requisition_id=?");
+    $stmt->execute([$id]);
+    return $stmt->rowCount() > 0;
+}
 
 function decline_requisition(PDO $conn, $id)
 {

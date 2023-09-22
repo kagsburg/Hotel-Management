@@ -102,8 +102,14 @@ $department = $row35['department_id'];
                                 </div>
                                 <div class="ibox-content">
                                     <?php
-                                    $stock = mysqli_query($con, "SELECT * FROM issuedstock WHERE department_id='$department' and status=1");
+                                    if ($_SESSION['sysrole'] != 'Store Attendant') {
+                                        $depart = 'department_id='.$department.' and';
+                                    }else{
+                                        $depart = '';
+                                    }
+                                    $stock = mysqli_query($con, "SELECT * FROM issuedstock WHERE $depart status=2");
                                     if (mysqli_num_rows($stock) > 0) {
+
                                     ?>
                                         <table class="table table-striped table-bordered table-hover dataTables-example">
                                             <thead>
@@ -112,10 +118,16 @@ $department = $row35['department_id'];
                                                     <th>Stock Item</th>
                                                     <th>Min Stock</th>
                                                     <th>In Stock</th>
-                                                    <th>Weighted Price</th>
+                                                    <!-- <th>Weighted Price</th> -->
                                                     <th>Unit</th>
                                                     <th>Category</th>
-                                                    <th>Stock Status</th>
+                                                    <th>Status</th>
+                                                    <?php 
+                                                    if ($_SESSION['sysrole'] == 'Store Attendant') {                                                       
+                                                    ?>
+                                                    <th>Department</th>
+                                                    <?php } ?>
+
                                                     <!-- <th>Action</th> -->
                                                 </tr>
                                             </thead>
@@ -123,6 +135,7 @@ $department = $row35['department_id'];
                                                 <?php
                                                 while ($rowa =  mysqli_fetch_array($stock)) {
                                                     $issuedstock_id =$rowa['issuedstock_id'];
+                                                    $department_id = $rowa['department_id'];
                                                     // get issued items
                                                     $getissueditems = mysqli_query($con, "SELECT * FROM issueditems WHERE issuedstock_id='$issuedstock_id'  ") or die(mysqli_error($con));
                                                     if (mysqli_num_rows($getissueditems) > 0){
@@ -160,8 +173,8 @@ $department = $row35['department_id'];
                                                         <td><?php echo $stockitem_id; ?></td>
                                                         <td><?php echo $stockitem; ?></td>
                                                         <td><?php echo $minstock; ?></td>
-                                                        <td><?php echo $stockleft; ?></td>
-                                                        <td><?php echo number_format($wprice); ?></td>
+                                                        <td><?php echo $issuedstock; ?></td>
+                                                        <!-- <td><?php echo number_format($wprice); ?></td> -->
                                                         <td>
                                                             <div class="tooltip-demo">
                                                                 <?php
@@ -179,11 +192,21 @@ $department = $row35['department_id'];
                                                                 echo $category;
                                                             }
                                                             ?></td>
-                                                        <th><?php if ($stockleft <= $minstock) {
+                                                        <td><?php if ($stockleft <= $minstock) {
                                                                 echo '<div class="text-danger">LOW</div>';
                                                             } else {
                                                                 echo '<div class="text-success">HIGH</div>';
-                                                            } ?></th>
+                                                            } ?></td>
+                                                        <?php if ($_SESSION['sysrole'] == 'Store Attendant'){ 
+                                                            $getdepartment = mysqli_query($con, "SELECT * FROM departments WHERE department_id ='$department_id' and status ='1'");
+                                                            $row35 = mysqli_fetch_array($getdepartment);
+                                                            $department = $row35['department_id'];
+                                                            $department= $row35['department'];
+                                                            ?>
+                                                            <td>
+                                                            <?php echo $department; ?>
+                                                            </td>
+                                                            <?php } ?>
                                                         <!-- <td class="center">
                                                             <a href="itemdetails?id=<?php echo $stockitem_id; ?>" class="btn btn-info btn-xs"><i class="fa fa-plus"></i> Item Details</a>
                                                             <?php
@@ -199,9 +222,7 @@ $department = $row35['department_id'];
                                                             <?php } ?>
                                                         </td> -->
                                                     </tr>
-                                                <?php } }else {
-                                                    echo '<div class="alert alert-warning">No Stock Items Found</div>';
-                                                } 
+                                                <?php } }
                                             }?>
                                             </tbody>
                                         </table>
